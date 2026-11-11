@@ -1,7 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import sourceMenu from "../../data/source-menu.json";
-import { head, put } from "@vercel/blob";
 
 export type MenuItem = {
   id: string;
@@ -23,10 +22,14 @@ export type MenuCategory = {
 type SourceCategory = { name: string; items: Omit<MenuItem, "sortOrder">[] };
 
 const TMP_FILE = path.join("/tmp", "shivas-cafe-menu.json");
-const DATA_FILE = path.join(process.cwd(), "data", "menu-data.json");
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+const GITHUB_REPO = process.env.GITHUB_REPO || "shivassalal-svg/shivas-cafe-menu";
+const MENU_FILE_PATH = "data/menu-data.json";
 
-// In-memory cache for serverless invocation lifetime
+// In-memory cache for fast repeat requests
 let memoryMenu: MenuCategory[] | null = null;
+let lastMenuFetchTime = 0;
+const CACHE_TTL_MS = 2000; // 2 seconds
 
 function getDefaultMenu(): MenuCategory[] {
   return (sourceMenu as SourceCategory[]).map((category, categoryIndex) => ({
@@ -42,68 +45,110 @@ function getDefaultMenu(): MenuCategory[] {
 }
 
 async function loadMenu(): Promise<MenuCategory[]> {
-  if (memoryMenu) return memoryMenu;
+  const now = Date.now();
+  if (memoryMenu && now - lastMenuFetchTime < CACHE_TTL_MS) {
+    return memoryMenu;
+  }
 
-  if (process.env.BLOB_READ_WRITE_TOKEN) {
+  // 1. Fetch from GitHub repository (authoritative shared store)
+  if (GITHUB_TOKEN && GITHUB_REPO) {
     try {
-      const blob = await head("shivas-menu-data.json");
-      if (blob?.url) {
-        const res = await fetch(blob.url, { cache: "no-store" });
-        if (res.ok) {
-          const parsed = (await res.json()) as MenuCategory[];
+      const res = await fetch(
+        `https://api.github.com/repos/${GITHUB_REPO}/contents/${MENU_FILE_PATH}`,
+        {
+          headers: {
+            Authorization: `token ${GITHUB_TOKEN}`,
+            Accept: "application/vnd.github.v3+json",
+          },
+          cache: "no-store",
+        }
+      );
+      if (res.ok) {
+        const data = (await res.json()) as { content?: string };
+        if (data.content) {
+          const decoded = Buffer.from(data.content, "base64").toString("utf-8");
+          const parsed = JSON.parse(decoded) as MenuCategory[];
           if (Array.isArray(parsed) && parsed.length > 0) {
             memoryMenu = parsed;
+            lastMenuFetchTime = now;
             return memoryMenu;
           }
         }
       }
-    } catch {
-      // blob not found or error, continue to file fallback
+    } catch (e) {
+      console.warn("Failed to load menu from GitHub:", e);
     }
   }
 
-  for (const filePath of [TMP_FILE, DATA_FILE]) {
-    try {
-      const data = await fs.readFile(/* turbopackIgnore: true */ filePath, "utf-8");
-      const parsed = JSON.parse(data) as MenuCategory[];
-      if (Array.isArray(parsed) && parsed.length > 0) {
-        memoryMenu = parsed;
-        return memoryMenu;
-      }
-    } catch {
-      // file doesn't exist or unreadable, try next
+  // 2. Fallback to /tmp
+  try {
+    const data = await fs.readFile(TMP_FILE, "utf-8");
+    const parsed = JSON.parse(data) as MenuCategory[];
+    if (Array.isArray(parsed) && parsed.length > 0) {
+      memoryMenu = parsed;
+      lastMenuFetchTime = now;
+      return memoryMenu;
     }
+  } catch {
+    // ignore
   }
 
+  // 3. Fallback to initial source menu
   memoryMenu = getDefaultMenu();
+  lastMenuFetchTime = now;
   return memoryMenu;
 }
 
 async function saveMenuData(menu: MenuCategory[]): Promise<void> {
   memoryMenu = menu;
-  const json = JSON.stringify(menu, null, 2);
+  lastMenuFetchTime = Date.now();
+  const jsonStr = JSON.stringify(menu, null, 2);
 
-  if (process.env.BLOB_READ_WRITE_TOKEN) {
+  // 1. Save to /tmp
+  try {
+    await fs.writeFile(TMP_FILE, jsonStr, "utf-8");
+  } catch {
+    // ignore
+  }
+
+  // 2. Persist to GitHub repository
+  if (GITHUB_TOKEN && GITHUB_REPO) {
     try {
-      await put("shivas-menu-data.json", json, {
-        access: "public",
-        addRandomSuffix: false,
-      });
+      let sha: string | undefined;
+      const getRes = await fetch(
+        `https://api.github.com/repos/${GITHUB_REPO}/contents/${MENU_FILE_PATH}`,
+        {
+          headers: {
+            Authorization: `token ${GITHUB_TOKEN}`,
+            Accept: "application/vnd.github.v3+json",
+          },
+          cache: "no-store",
+        }
+      );
+      if (getRes.ok) {
+        const curData = (await getRes.json()) as { sha?: string };
+        sha = curData.sha;
+      }
+
+      await fetch(
+        `https://api.github.com/repos/${GITHUB_REPO}/contents/${MENU_FILE_PATH}`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `token ${GITHUB_TOKEN}`,
+            "Content-Type": "application/json",
+            Accept: "application/vnd.github.v3+json",
+          },
+          body: JSON.stringify({
+            message: "Update menu data via Admin Studio",
+            content: Buffer.from(jsonStr).toString("base64"),
+            sha,
+          }),
+        }
+      );
     } catch (err) {
-      console.error("Vercel Blob save failed:", err);
+      console.error("Failed to commit menu to GitHub:", err);
     }
-  }
-
-  try {
-    await fs.writeFile(TMP_FILE, json, "utf-8");
-  } catch {
-    // ignore
-  }
-
-  try {
-    await fs.writeFile(DATA_FILE, json, "utf-8");
-  } catch {
-    // ignore
   }
 }
 

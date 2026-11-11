@@ -3,6 +3,7 @@ import { MenuManager } from "./menu-manager";
 import { AdminLogin } from "./admin-login";
 
 export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export default async function AdminPage() {
   const owner = await siteOwnerOrNull();

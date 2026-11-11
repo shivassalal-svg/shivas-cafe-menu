@@ -35,3 +35,13 @@
 .filter-pill.active{background:var(--leaf);color:white;border-color:var(--leaf)}
 .filter-pill.active-oos{background:#b91c1c;color:white;border-color:#b91c1c}
 .new-item-stock-toggle{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);font-weight:600;cursor:pointer;white-space:nowrap}
+
+/* Image Upload Styles */
+.thumb-upload-overlay{position:absolute;top:2px;right:2px;width:22px;height:22px;background:rgba(0,0,0,0.6);color:#fff;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;cursor:pointer;transition:background .15s}
+.thumb-upload-overlay:hover{background:rgba(0,0,0,0.85)}
+.new-item-image-row{display:flex;align-items:center;gap:8px;flex:1}
+.image-upload-button{display:inline-flex;align-items:center;gap:4px;background:#fbfaf5;border:1px dashed #b9cfbb;border-radius:8px;padding:8px 12px;font-size:11px;font-weight:700;color:var(--leaf);cursor:pointer;white-space:nowrap;transition:all .15s}
+.image-upload-button:hover{background:#f0f7f2;border-color:var(--leaf)}
+.new-item-preview-thumb{width:36px;height:36px;object-fit:cover;border-radius:6px;border:1px solid var(--line)}
+.preview-wrap{display:flex;align-items:center;gap:5px}
+.small-link{font-size:10px;cursor:pointer}

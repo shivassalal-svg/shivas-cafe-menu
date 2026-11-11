@@ -13,6 +13,43 @@ type MenuItem = {
 };
 type Category = { id: string; name: string; sortOrder: number; items: MenuItem[] };
 
+async function compressImage(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const MAX_DIM = 640;
+        let width = img.width;
+        let height = img.height;
+        if (width > height) {
+          if (width > MAX_DIM) {
+            height = Math.round((height * MAX_DIM) / width);
+            width = MAX_DIM;
+          }
+        } else {
+          if (height > MAX_DIM) {
+            width = Math.round((width * MAX_DIM) / height);
+            height = MAX_DIM;
+          }
+        }
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return resolve(e.target?.result as string);
+        ctx.drawImage(img, 0, 0, width, height);
+        const dataUrl = canvas.toDataURL("image/webp", 0.82);
+        resolve(dataUrl);
+      };
+      img.onerror = reject;
+      img.src = e.target?.result as string;
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
 async function requestMenu(action: Record<string, string>) {
   const response = await fetch("/api/menu", {
     method: "POST",
@@ -133,8 +170,7 @@ export function MenuManager({ ownerName }: { ownerName: string }) {
         <p className="eyebrow">Owner dashboard</p>
         <h1>Manage your menu.</h1>
         <p>
-          Add, update, or remove menu options. Toggle items out of stock during service. The QR customer menu
-          updates immediately.
+          Add, update, or remove menu options. Upload dish photos directly and toggle items out of stock during service.
         </p>
       </section>
 
@@ -155,7 +191,7 @@ export function MenuManager({ ownerName }: { ownerName: string }) {
             Open customer menu
           </a>
           <div className="qr-tip">
-            Menu edits and out-of-stock toggles update instantly on the live QR menu.
+            Menu edits, photos, and stock toggles reflect instantly on the live QR menu.
           </div>
         </aside>
 
@@ -255,41 +291,12 @@ export function MenuManager({ ownerName }: { ownerName: string }) {
                   ))}
                 </div>
 
-                <form
-                  className="new-item-form"
-                  onSubmit={async (event) => {
-                    event.preventDefault();
-                    const form = event.currentTarget;
-                    const data = new FormData(form);
-                    const name = String(data.get("name") || "").trim();
-                    if (!name) return;
-                    await save(
-                      {
-                        action: "save-item",
-                        categoryId: category.id,
-                        name,
-                        price: String(data.get("price") || ""),
-                        description: String(data.get("description") || ""),
-                        image: String(data.get("image") || ""),
-                        outOfStock: data.get("outOfStock") ? "true" : "false",
-                      },
-                      "Item added to the live menu."
-                    );
-                    form.reset();
-                  }}
-                >
-                  <input name="name" placeholder="New item name" aria-label={`New item in ${category.name}`} required />
-                  <input name="price" placeholder="₹ price" aria-label="New item price" />
-                  <input name="description" placeholder="Size or short detail" aria-label="New item details" />
-                  <input name="image" placeholder="Image path (optional)" aria-label="New item image path" />
-                  <label className="new-item-stock-toggle">
-                    <input name="outOfStock" type="checkbox" />
-                    <span>Out of stock</span>
-                  </label>
-                  <button className="button" disabled={busy}>
-                    Add item
-                  </button>
-                </form>
+                <NewItemForm
+                  categoryId={category.id}
+                  categoryName={category.name}
+                  busy={busy}
+                  save={save}
+                />
               </details>
             ))}
             {!visibleMenu.length && <div className="empty-state">No matching menu options.</div>}
@@ -300,6 +307,129 @@ export function MenuManager({ ownerName }: { ownerName: string }) {
         </section>
       </div>
     </main>
+  );
+}
+
+function NewItemForm({
+  categoryId,
+  categoryName,
+  busy,
+  save,
+}: {
+  categoryId: string;
+  categoryName: string;
+  busy: boolean;
+  save: (action: Record<string, string>, success: string) => Promise<void>;
+}) {
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
+  const [image, setImage] = useState("");
+  const [outOfStock, setOutOfStock] = useState(false);
+  const [uploading, setUploading] = useState(false);
+
+  async function handleFileSelect(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    try {
+      setUploading(true);
+      const compressed = await compressImage(file);
+      setImage(compressed);
+    } catch (e) {
+      console.error("Photo upload failed:", e);
+    } finally {
+      setUploading(false);
+    }
+  }
+
+  async function handleSubmit(event: React.FormEvent) {
+    event.preventDefault();
+    if (!name.trim()) return;
+    await save(
+      {
+        action: "save-item",
+        categoryId,
+        name: name.trim(),
+        price: price.trim(),
+        description: description.trim(),
+        image: image.trim(),
+        outOfStock: outOfStock ? "true" : "false",
+      },
+      `“${name}” added to the live menu.`
+    );
+    setName("");
+    setPrice("");
+    setDescription("");
+    setImage("");
+    setOutOfStock(false);
+  }
+
+  return (
+    <form className="new-item-form" onSubmit={handleSubmit}>
+      <input
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        placeholder="New item name"
+        aria-label={`New item in ${categoryName}`}
+        required
+      />
+      <input
+        value={price}
+        onChange={(e) => setPrice(e.target.value)}
+        placeholder="₹ price"
+        aria-label="New item price"
+      />
+      <input
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+        placeholder="Size or short detail"
+        aria-label="New item details"
+      />
+
+      <div className="new-item-image-row">
+        {image ? (
+          <div className="preview-wrap">
+            <img src={image} className="new-item-preview-thumb" alt="Preview" />
+            <button
+              type="button"
+              className="text-danger small-link"
+              onClick={() => setImage("")}
+            >
+              ✕
+            </button>
+          </div>
+        ) : null}
+        <label className="image-upload-button">
+          <span>{uploading ? "Compressing…" : "📷 Upload photo"}</span>
+          <input
+            type="file"
+            accept="image/*"
+            style={{ display: "none" }}
+            disabled={busy || uploading}
+            onChange={handleFileSelect}
+          />
+        </label>
+        <input
+          value={image}
+          onChange={(e) => setImage(e.target.value)}
+          placeholder="or image URL"
+          aria-label="New item image URL"
+        />
+      </div>
+
+      <label className="new-item-stock-toggle">
+        <input
+          type="checkbox"
+          checked={outOfStock}
+          onChange={(e) => setOutOfStock(e.target.checked)}
+        />
+        <span>Out of stock</span>
+      </label>
+
+      <button className="button" disabled={busy || uploading}>
+        Add item
+      </button>
+    </form>
   );
 }
 
@@ -319,10 +449,42 @@ function ItemEditor({
   const [description, setDescription] = useState(item.description);
   const [image, setImage] = useState(item.image);
   const [outOfStock, setOutOfStock] = useState(Boolean(item.outOfStock));
+  const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
+    setName(item.name);
+    setPrice(item.price);
+    setDescription(item.description);
+    setImage(item.image);
     setOutOfStock(Boolean(item.outOfStock));
-  }, [item.outOfStock]);
+  }, [item.name, item.price, item.description, item.image, item.outOfStock]);
+
+  async function handlePhotoUpload(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    try {
+      setUploading(true);
+      const compressed = await compressImage(file);
+      setImage(compressed);
+      await save(
+        {
+          action: "save-item",
+          id: item.id,
+          categoryId,
+          name,
+          price,
+          description,
+          image: compressed,
+          outOfStock: outOfStock ? "true" : "false",
+        },
+        `Photo updated for “${name}”.`
+      );
+    } catch (e) {
+      console.error("Failed to upload photo:", e);
+    } finally {
+      setUploading(false);
+    }
+  }
 
   return (
     <form
@@ -340,26 +502,67 @@ function ItemEditor({
             image,
             outOfStock: outOfStock ? "true" : "false",
           },
-          "Menu option updated and published."
+          `“${name}” updated and published.`
         );
       }}
     >
       <div className="thumb-wrap">
-        {item.image ? (
-          <img className="manage-thumb" src={item.image} alt="" loading="lazy" />
+        {image ? (
+          <img className="manage-thumb" src={image} alt="" loading="lazy" />
         ) : (
           <div className="manage-thumb image-placeholder">S</div>
         )}
         {outOfStock && <span className="mini-oos-badge">OOS</span>}
+        <label className="thumb-upload-overlay" title="Upload new photo">
+          <span>{uploading ? "…" : "📷"}</span>
+          <input
+            type="file"
+            accept="image/*"
+            style={{ display: "none" }}
+            disabled={busy || uploading}
+            onChange={handlePhotoUpload}
+          />
+        </label>
       </div>
+
       <div className="manage-fields">
         <div className="manage-field-row">
-          <input value={name} onChange={(event) => setName(event.target.value)} aria-label={`${item.name} name`} />
-          <input value={price} onChange={(event) => setPrice(event.target.value)} aria-label={`${item.name} price`} />
-          <input value={description} onChange={(event) => setDescription(event.target.value)} aria-label={`${item.name} details`} />
+          <input
+            value={name}
+            onChange={(event) => setName(event.target.value)}
+            aria-label={`${item.name} name`}
+          />
+          <input
+            value={price}
+            onChange={(event) => setPrice(event.target.value)}
+            aria-label={`${item.name} price`}
+          />
+          <input
+            value={description}
+            onChange={(event) => setDescription(event.target.value)}
+            aria-label={`${item.name} details`}
+          />
         </div>
         <div className="manage-field-row secondary-fields">
-          <input value={image} onChange={(event) => setImage(event.target.value)} aria-label={`${item.name} image path`} />
+          <div className="new-item-image-row">
+            <label className="image-upload-button small-button">
+              <span>{uploading ? "…" : "📷 Photo"}</span>
+              <input
+                type="file"
+                accept="image/*"
+                style={{ display: "none" }}
+                disabled={busy || uploading}
+                onChange={handlePhotoUpload}
+              />
+            </label>
+            <input
+              value={image}
+              onChange={(event) => setImage(event.target.value)}
+              aria-label={`${item.name} image path`}
+              placeholder="Photo URL or uploaded"
+            />
+          </div>
+
           <button
             type="button"
             className={`stock-pill-btn ${outOfStock ? "pill-oos" : "pill-instock"}`}
@@ -381,7 +584,7 @@ function ItemEditor({
           >
             {outOfStock ? "🔴 Out of stock" : "🟢 In stock"}
           </button>
-          <button className="button small-button" disabled={busy}>
+          <button className="button small-button" disabled={busy || uploading}>
             Save
           </button>
           <button

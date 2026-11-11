@@ -1,6 +1,7 @@
 import { getMenu } from "./lib/menu";
 
 export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export default async function Home() {
   const menu = await getMenu();
