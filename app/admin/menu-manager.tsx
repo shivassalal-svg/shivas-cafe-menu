@@ -18,8 +18,8 @@ async function requestMenu(action: Record<string, string>) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(action),
   });
-  const body = await response.json();
-  if (!response.ok) throw new Error(body.error || "Could not save changes.");
+  const body = (await response.json()) as { error?: string } | Category[];
+  if (!response.ok) throw new Error((body as { error?: string })?.error || "Could not save changes.");
   return body as Category[];
 }
 
@@ -74,7 +74,21 @@ export function MenuManager({ ownerName }: { ownerName: string }) {
           <span className="menu-mark">S</span>
           <span>Shiva’s Cafe<small>Independent Menu Studio</small></span>
         </a>
-        <div className="studio-user"><span>Signed in as {ownerName}</span><a href="/">Open customer menu ↗</a></div>
+        <div className="studio-user">
+          <span>Signed in as {ownerName}</span>
+          <button
+            type="button"
+            onClick={async () => {
+              await fetch("/api/admin/auth", { method: "DELETE" });
+              window.location.reload();
+            }}
+            className="text-link"
+            style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}
+          >
+            Sign out
+          </button>
+          <a href="/">Open customer menu ↗</a>
+        </div>
       </header>
 
       <section className="studio-intro">
