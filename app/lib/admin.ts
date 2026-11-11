@@ -1,24 +1,21 @@
 import { cookies } from "next/headers";
-import { getChatGPTUser, type ChatGPTUser } from "../chatgpt-auth";
+
+export type AdminUser = {
+  userId: string;
+  displayName: string;
+  email: string;
+  fullName: string | null;
+};
 
 const SITE_OWNER_EMAIL = "development@rysysthtechnologies.com";
 
 export async function isSiteOwner(): Promise<boolean> {
   const cookieStore = await cookies();
   const session = cookieStore.get("shivas_admin_session");
-  if (session?.value === "authenticated") {
-    return true;
-  }
-
-  const user = await getChatGPTUser();
-  if (user && (user.email.toLowerCase() === SITE_OWNER_EMAIL || isLocalPreviewUser(user.email))) {
-    return true;
-  }
-
-  return false;
+  return session?.value === "authenticated";
 }
 
-export async function siteOwnerOrNull(): Promise<ChatGPTUser | null> {
+export async function siteOwnerOrNull(): Promise<AdminUser | null> {
   const cookieStore = await cookies();
   const session = cookieStore.get("shivas_admin_session");
   if (session?.value === "authenticated") {
@@ -30,14 +27,5 @@ export async function siteOwnerOrNull(): Promise<ChatGPTUser | null> {
     };
   }
 
-  const user = await getChatGPTUser();
-  if (user && (user.email.toLowerCase() === SITE_OWNER_EMAIL || isLocalPreviewUser(user.email))) {
-    return user;
-  }
-
   return null;
-}
-
-function isLocalPreviewUser(email?: string) {
-  return process.env.NODE_ENV !== "production" && email?.toLowerCase() === "seedy@sites.test";
 }

@@ -36,16 +36,27 @@ export default async function Home() {
             </div>
             <div className="product-grid">
               {category.items.map((item) => (
-                <article className="product-card" key={item.id}>
+                <article
+                  className={`product-card ${item.outOfStock ? "out-of-stock-card" : ""}`}
+                  key={item.id}
+                >
                   <div className="product-image-wrap">
                     {item.image ? (
                       <img className="product-image" src={item.image} alt={item.name} loading="lazy" />
                     ) : <div className="image-placeholder" aria-label="No image available">S</div>}
+                    {item.outOfStock && (
+                      <span className="stock-badge out-badge">Out of stock</span>
+                    )}
                   </div>
                   <div className="product-copy">
                     <div className="product-name">{item.name}</div>
                     {item.description && <div className="product-description">{item.description}</div>}
-                    <div className="product-price">{item.price}</div>
+                    <div className="product-price-row">
+                      <div className="product-price">{item.price}</div>
+                      {item.outOfStock && (
+                        <span className="stock-status-tag">Currently unavailable</span>
+                      )}
+                    </div>
                   </div>
                 </article>
               ))}

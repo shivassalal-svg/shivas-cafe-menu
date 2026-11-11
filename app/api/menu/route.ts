@@ -5,6 +5,7 @@ import {
   getMenu,
   saveCategory,
   saveItem,
+  toggleStock,
 } from "../../lib/menu";
 
 export const dynamic = "force-dynamic";
@@ -39,6 +40,16 @@ export async function POST(request: Request) {
         price: typeof body.price === "string" ? body.price : "",
         description: typeof body.description === "string" ? body.description : "",
         image: typeof body.image === "string" ? body.image : "",
+        outOfStock: Boolean(body.outOfStock),
+      });
+    } else if (body.action === "toggle-stock") {
+      if (typeof body.id !== "string" || typeof body.categoryId !== "string") {
+        throw new Error("Item ID and category are required.");
+      }
+      await toggleStock({
+        id: body.id,
+        categoryId: body.categoryId,
+        outOfStock: body.outOfStock === true || body.outOfStock === "true",
       });
     } else if (body.action === "delete-item") {
       if (typeof body.id !== "string" || typeof body.categoryId !== "string") {

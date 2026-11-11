@@ -9,6 +9,7 @@ export type MenuItem = {
   description: string;
   image: string;
   sortOrder: number;
+  outOfStock?: boolean;
 };
 
 export type MenuCategory = {
@@ -34,6 +35,7 @@ function getDefaultMenu(): MenuCategory[] {
     items: category.items.map((item, itemIndex) => ({
       ...item,
       sortOrder: itemIndex,
+      outOfStock: Boolean(item.outOfStock),
     })),
   }));
 }
@@ -121,6 +123,7 @@ export async function saveItem(input: {
   price: string;
   description: string;
   image: string;
+  outOfStock?: boolean;
 }): Promise<void> {
   const menu = await loadMenu();
   const category = menu.find((c) => c.id === input.categoryId);
@@ -132,6 +135,7 @@ export async function saveItem(input: {
     price: input.price.trim().slice(0, 32),
     description: input.description.trim().slice(0, 240),
     image: input.image.trim().slice(0, 500),
+    outOfStock: Boolean(input.outOfStock),
   };
   if (!values.name) throw new Error("Item name is required.");
 
@@ -158,6 +162,22 @@ export async function saveItem(input: {
   }
 
   await saveMenuData(menu);
+}
+
+export async function toggleStock(input: {
+  id: string;
+  categoryId: string;
+  outOfStock: boolean;
+}): Promise<void> {
+  const menu = await loadMenu();
+  const category = menu.find((c) => c.id === input.categoryId);
+  if (category) {
+    const item = category.items.find((i) => i.id === input.id);
+    if (item) {
+      item.outOfStock = input.outOfStock;
+      await saveMenuData(menu);
+    }
+  }
 }
 
 export async function deleteItem(input: { id: string; categoryId: string }): Promise<void> {

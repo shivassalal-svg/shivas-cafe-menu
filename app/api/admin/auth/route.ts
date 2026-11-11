@@ -32,3 +32,4 @@ export async function DELETE() {
   cookieStore.delete("shivas_admin_session");
   return NextResponse.json({ success: true });
 }
+
