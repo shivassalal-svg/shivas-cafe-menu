@@ -1,6 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import sourceMenu from "../../data/source-menu.json";
+import { head, put } from "@vercel/blob";
 
 export type MenuItem = {
   id: string;
@@ -43,6 +44,24 @@ function getDefaultMenu(): MenuCategory[] {
 async function loadMenu(): Promise<MenuCategory[]> {
   if (memoryMenu) return memoryMenu;
 
+  if (process.env.BLOB_READ_WRITE_TOKEN) {
+    try {
+      const blob = await head("shivas-menu-data.json");
+      if (blob?.url) {
+        const res = await fetch(blob.url, { cache: "no-store" });
+        if (res.ok) {
+          const parsed = (await res.json()) as MenuCategory[];
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            memoryMenu = parsed;
+            return memoryMenu;
+          }
+        }
+      }
+    } catch {
+      // blob not found or error, continue to file fallback
+    }
+  }
+
   for (const filePath of [TMP_FILE, DATA_FILE]) {
     try {
       const data = await fs.readFile(/* turbopackIgnore: true */ filePath, "utf-8");
@@ -63,6 +82,17 @@ async function loadMenu(): Promise<MenuCategory[]> {
 async function saveMenuData(menu: MenuCategory[]): Promise<void> {
   memoryMenu = menu;
   const json = JSON.stringify(menu, null, 2);
+
+  if (process.env.BLOB_READ_WRITE_TOKEN) {
+    try {
+      await put("shivas-menu-data.json", json, {
+        access: "public",
+        addRandomSuffix: false,
+      });
+    } catch (err) {
+      console.error("Vercel Blob save failed:", err);
+    }
+  }
 
   try {
     await fs.writeFile(TMP_FILE, json, "utf-8");
