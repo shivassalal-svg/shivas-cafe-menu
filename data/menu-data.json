@@ -11,7 +11,7 @@
         "description": "180 ML",
         "image": "/menu-images/9d1905b9e289e4b2.webp",
         "sortOrder": 0,
-        "outOfStock": false
+        "outOfStock": true
       },
       {
         "id": "01-001",
