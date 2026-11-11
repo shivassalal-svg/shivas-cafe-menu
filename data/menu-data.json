@@ -1,0 +1,1560 @@
+[
+  {
+    "name": "Hot Beverages",
+    "items": [
+      {
+        "id": "01-000",
+        "name": "Hot Espresso",
+        "price": "₹100",
+        "description": "180 ML",
+        "image": "/menu-images/9d1905b9e289e4b2.webp"
+      },
+      {
+        "id": "01-001",
+        "name": "Hot Chocolate",
+        "price": "₹110",
+        "description": "180 ML",
+        "image": "/menu-images/c355a8202ae68a64.webp"
+      },
+      {
+        "id": "01-002",
+        "name": "Hot Bourn Vita",
+        "price": "₹110",
+        "description": "180 ML",
+        "image": "/menu-images/d6a7fa93a308c12c.webp"
+      },
+      {
+        "id": "01-003",
+        "name": "Americano Coffee",
+        "price": "₹120",
+        "description": "180 ML",
+        "image": "/menu-images/2cea68a82290c9d5.webp"
+      },
+      {
+        "id": "01-004",
+        "name": "Café Latte",
+        "price": "₹130",
+        "description": "180 ML",
+        "image": "/menu-images/005cf5f0bfad3d1d.webp"
+      },
+      {
+        "id": "01-005",
+        "name": "Café Mocha",
+        "price": "₹135",
+        "description": "180 ML",
+        "image": "/menu-images/2964ba3be6627764.webp"
+      },
+      {
+        "id": "01-006",
+        "name": "Cappuccino",
+        "price": "₹135",
+        "description": "180 ML",
+        "image": "/menu-images/b37d002cd5d363c2.webp"
+      },
+      {
+        "id": "01-007",
+        "name": "Caramel Latte",
+        "price": "₹135",
+        "description": "180 ML",
+        "image": "/menu-images/bf5b49c4f6859e93.webp"
+      },
+      {
+        "id": "01-008",
+        "name": "Irish Latte",
+        "price": "₹135",
+        "description": "180 ML",
+        "image": "/menu-images/2db09123a9a4e1a9.webp"
+      },
+      {
+        "id": "01-009",
+        "name": "Hazelnut Latte",
+        "price": "₹135",
+        "description": "180 ML",
+        "image": "/menu-images/1c26881ec3f31acb.webp"
+      }
+    ]
+  },
+  {
+    "name": "Tea Varieties",
+    "items": [
+      {
+        "id": "02-000",
+        "name": "Green Tea",
+        "price": "₹60",
+        "description": "130 ML",
+        "image": "/menu-images/afdf6db30f39812c.webp"
+      },
+      {
+        "id": "02-001",
+        "name": "Hot Lemon Tea",
+        "price": "₹55",
+        "description": "130 ML",
+        "image": "/menu-images/0073f52b9f5131d0.webp"
+      },
+      {
+        "id": "02-002",
+        "name": "Ginger Tea",
+        "price": "₹55",
+        "description": "130 ML",
+        "image": "/menu-images/b2f4fbaf55fdd572.webp"
+      },
+      {
+        "id": "02-003",
+        "name": "Chocolate Tea",
+        "price": "₹55",
+        "description": "130 ML",
+        "image": "/menu-images/20581af2ea24b205.webp"
+      },
+      {
+        "id": "02-004",
+        "name": "Kullad Tea",
+        "price": "₹65",
+        "description": "130 ML",
+        "image": "/menu-images/7150c420cdc957cf.webp"
+      }
+    ]
+  },
+  {
+    "name": "Coffee House",
+    "items": [
+      {
+        "id": "03-000",
+        "name": "Cold Coffee",
+        "price": "₹105",
+        "description": "280 ML",
+        "image": "/menu-images/3a0a548ea91b7ec4.webp"
+      },
+      {
+        "id": "03-001",
+        "name": "Cold Coffee With Ice cream",
+        "price": "₹135",
+        "description": "280 ML",
+        "image": "/menu-images/8489504e1277aea2.webp"
+      },
+      {
+        "id": "03-002",
+        "name": "Gj01 Cold Coffee",
+        "price": "₹140",
+        "description": "280 ML",
+        "image": "/menu-images/ac5bf619439f6f86.webp"
+      },
+      {
+        "id": "03-003",
+        "name": "Coffee + Choco",
+        "price": "₹125",
+        "description": "280 ML",
+        "image": "/menu-images/6501072b024cf80e.webp"
+      },
+      {
+        "id": "03-004",
+        "name": "Oreo Coffee",
+        "price": "₹125",
+        "description": "280 ML",
+        "image": "/menu-images/5cba405834fc2c3b.webp"
+      },
+      {
+        "id": "03-005",
+        "name": "Americano Coffee (Cold)",
+        "price": "₹110",
+        "description": "280 ML",
+        "image": "/menu-images/43f45421369b1a15.webp"
+      },
+      {
+        "id": "03-006",
+        "name": "Espresso Sprite",
+        "price": "₹150",
+        "description": "280 ML",
+        "image": "/menu-images/95372d59a9757def.webp"
+      },
+      {
+        "id": "03-007",
+        "name": "Vietnamese Coffee",
+        "price": "₹200",
+        "description": "280 ML",
+        "image": "/menu-images/880ec92fcca651eb.webp"
+      }
+    ]
+  },
+  {
+    "name": "Coco Heaven",
+    "items": [
+      {
+        "id": "04-000",
+        "name": "Cold Coco",
+        "price": "₹105",
+        "description": "280 ML",
+        "image": "/menu-images/415939753d033042.webp"
+      },
+      {
+        "id": "04-001",
+        "name": "Cold Coco With Ice cream",
+        "price": "₹135",
+        "description": "280 ML",
+        "image": "/menu-images/503ffb4e9c2a5cf6.webp"
+      },
+      {
+        "id": "04-002",
+        "name": "Kaju Cold Coco",
+        "price": "₹140",
+        "description": "280 ML",
+        "image": "/menu-images/d4c8a51f76b3e530.webp"
+      },
+      {
+        "id": "04-003",
+        "name": "3 in One Coco",
+        "price": "₹130",
+        "description": "280 ML",
+        "image": "/menu-images/f436e04efe9ada0e.webp"
+      },
+      {
+        "id": "04-004",
+        "name": "Cold Bourn Vita",
+        "price": "₹120",
+        "description": "280 ML",
+        "image": "/menu-images/93672efc60a42a76.webp"
+      },
+      {
+        "id": "04-005",
+        "name": "Chocolate Milkshake",
+        "price": "₹115",
+        "description": "280 ML",
+        "image": "/menu-images/a6881c33fc26f37e.webp"
+      }
+    ]
+  },
+  {
+    "name": "Shiva's Special",
+    "items": [
+      {
+        "id": "05-000",
+        "name": "Brownie Cold Coffee",
+        "price": "₹150",
+        "description": "280 ML",
+        "image": "/menu-images/6967f32c72a9a4df.webp"
+      },
+      {
+        "id": "05-001",
+        "name": "Irish Cold Coffee",
+        "price": "₹150",
+        "description": "280 ML",
+        "image": "/menu-images/e118a1493fc55ab0.webp"
+      },
+      {
+        "id": "05-002",
+        "name": "Hazelnut Cold Coffee",
+        "price": "₹150",
+        "description": "280 ML",
+        "image": "/menu-images/373d0b3dcdf207dc.webp"
+      },
+      {
+        "id": "05-003",
+        "name": "Caramel Cold Coffee",
+        "price": "₹150",
+        "description": "280 ML",
+        "image": "/menu-images/4650fb75abd73065.webp"
+      },
+      {
+        "id": "05-004",
+        "name": "Creamy Coffee",
+        "price": "₹150",
+        "description": "280 ML",
+        "image": "/menu-images/6567fc7a824d2623.webp"
+      },
+      {
+        "id": "05-005",
+        "name": "Creamy Chocolate",
+        "price": "₹150",
+        "description": "280 ML",
+        "image": "/menu-images/34a8dd7cd73de27a.webp"
+      }
+    ]
+  },
+  {
+    "name": "Milk Shake Hub",
+    "items": [
+      {
+        "id": "06-000",
+        "name": "Butter Scotch",
+        "price": "₹120",
+        "description": "280 ML",
+        "image": "/menu-images/d96569b7a644b943.webp"
+      },
+      {
+        "id": "06-001",
+        "name": "Strawberry",
+        "price": "₹120",
+        "description": "280 ML",
+        "image": "/menu-images/8849d424848a6edc.webp"
+      },
+      {
+        "id": "06-002",
+        "name": "Kesar Elaichi",
+        "price": "₹120",
+        "description": "280 ML",
+        "image": "/menu-images/04c09a312272cac4.webp"
+      },
+      {
+        "id": "06-003",
+        "name": "Rose",
+        "price": "₹120",
+        "description": "280 ML",
+        "image": "/menu-images/df2fc644fdd78332.webp"
+      },
+      {
+        "id": "06-004",
+        "name": "Mango",
+        "price": "₹120",
+        "description": "280 ML",
+        "image": "/menu-images/292c0fe0d5c1d8bc.webp"
+      },
+      {
+        "id": "06-005",
+        "name": "Vanilla",
+        "price": "₹120",
+        "description": "280 ML",
+        "image": "/menu-images/4089d13f0af07f6e.webp"
+      },
+      {
+        "id": "06-006",
+        "name": "Chikoo Shake",
+        "price": "₹120",
+        "description": "280 ML",
+        "image": "/menu-images/c20f5e0eb90eb7c3.webp"
+      },
+      {
+        "id": "06-007",
+        "name": "Kesar",
+        "price": "₹120",
+        "description": "280 ML",
+        "image": "/menu-images/f2796fd126c68049.webp"
+      },
+      {
+        "id": "06-008",
+        "name": "Chocolate Crunch",
+        "price": "₹120",
+        "description": "280 ML",
+        "image": "/menu-images/8fc5ae9c18d65710.webp"
+      }
+    ]
+  },
+  {
+    "name": "Thick Shake Tales",
+    "items": [
+      {
+        "id": "07-000",
+        "name": "Coffee Thickshake",
+        "price": "₹240",
+        "description": "280 ML",
+        "image": "/menu-images/7c9e9e6194194461.webp"
+      },
+      {
+        "id": "07-001",
+        "name": "Oreo Thickshake",
+        "price": "₹240",
+        "description": "280 ML",
+        "image": "/menu-images/0c465b88707a742d.webp"
+      },
+      {
+        "id": "07-002",
+        "name": "Chocolate Thickshake",
+        "price": "₹240",
+        "description": "280 ML",
+        "image": "/menu-images/4236a245ec6fdcbc.webp"
+      },
+      {
+        "id": "07-003",
+        "name": "Bourn Vita Thickshake",
+        "price": "₹240",
+        "description": "280 ML",
+        "image": "/menu-images/1e21873ba1e74130.webp"
+      }
+    ]
+  },
+  {
+    "name": "Royal Thick Shake",
+    "items": [
+      {
+        "id": "08-000",
+        "name": "Biscoff Shake",
+        "price": "₹250",
+        "description": "280 ML",
+        "image": "/menu-images/a27748ac80d9f110.webp"
+      },
+      {
+        "id": "08-001",
+        "name": "Kit Kat Shake",
+        "price": "₹250",
+        "description": "280 ML",
+        "image": "/menu-images/47650277e8ca120a.webp"
+      },
+      {
+        "id": "08-002",
+        "name": "Chocolate Ferrero",
+        "price": "₹250",
+        "description": "280 ML",
+        "image": "/menu-images/c69af25a96e19123.webp"
+      },
+      {
+        "id": "08-003",
+        "name": "Brownie Shake",
+        "price": "₹250",
+        "description": "280 ML",
+        "image": "/menu-images/9977284f15777fb1.webp"
+      },
+      {
+        "id": "08-004",
+        "name": "Kaju Anjir",
+        "price": "₹280",
+        "description": "280 ML",
+        "image": "/menu-images/d6042b8b48263f5d.webp"
+      },
+      {
+        "id": "08-005",
+        "name": "Badam Anjir",
+        "price": "₹280",
+        "description": "280 ML",
+        "image": "/menu-images/d3915b817110bfe7.webp"
+      },
+      {
+        "id": "08-006",
+        "name": "Dry Fruit Special",
+        "price": "₹280",
+        "description": "280 ML",
+        "image": "/menu-images/6e7fa736c4b433bb.webp"
+      }
+    ]
+  },
+  {
+    "name": "Mocktail Bar",
+    "items": [
+      {
+        "id": "09-000",
+        "name": "Classic Mojito",
+        "price": "₹140",
+        "description": "280 ML",
+        "image": "/menu-images/68e8331a7c61c839.webp"
+      },
+      {
+        "id": "09-001",
+        "name": "Mint Mojito",
+        "price": "₹140",
+        "description": "280 ML",
+        "image": "/menu-images/4ab057e5ab1aca06.webp"
+      },
+      {
+        "id": "09-002",
+        "name": "Berry Mojito",
+        "price": "₹140",
+        "description": "280 ML",
+        "image": "/menu-images/33dcb7aef2508c05.webp"
+      },
+      {
+        "id": "09-003",
+        "name": "Watermelon Mojito",
+        "price": "₹140",
+        "description": "280 ML",
+        "image": "/menu-images/4b880930eb65d31a.webp"
+      },
+      {
+        "id": "09-004",
+        "name": "Roseberry Mojito",
+        "price": "₹140",
+        "description": "280 ML",
+        "image": "/menu-images/118de6f94da9f473.webp"
+      },
+      {
+        "id": "09-005",
+        "name": "Green Apple Mojito",
+        "price": "₹140",
+        "description": "280 ML",
+        "image": "/menu-images/53181a1bba68637e.webp"
+      },
+      {
+        "id": "09-006",
+        "name": "Pink Lady",
+        "price": "₹135",
+        "description": "280 ML",
+        "image": "/menu-images/e6cd3cb70a93967c.webp"
+      },
+      {
+        "id": "09-007",
+        "name": "Blue Lagoon",
+        "price": "₹135",
+        "description": "280 ML",
+        "image": "/menu-images/341add6c75fa3504.webp"
+      },
+      {
+        "id": "09-008",
+        "name": "Blue berry",
+        "price": "₹135",
+        "description": "280 ML",
+        "image": "/menu-images/2fc4ad2594566409.webp"
+      }
+    ]
+  },
+  {
+    "name": "Icey Refreshment",
+    "items": [
+      {
+        "id": "10-000",
+        "name": "Lemon Ice Tea",
+        "price": "₹110",
+        "description": "280 ML",
+        "image": "/menu-images/2713ebc675ff21f5.webp"
+      },
+      {
+        "id": "10-001",
+        "name": "Peach Ice Tea",
+        "price": "₹110",
+        "description": "280 ML",
+        "image": "/menu-images/bdb1245be7dbe058.webp"
+      },
+      {
+        "id": "10-002",
+        "name": "Watermelon Ice Tea",
+        "price": "₹120",
+        "description": "280 ML",
+        "image": "/menu-images/5a8b5045ba15503c.webp"
+      }
+    ]
+  },
+  {
+    "name": "Double Layer Waffle",
+    "items": [
+      {
+        "id": "11-000",
+        "name": "Belgium Milk Choco",
+        "price": "₹110",
+        "description": "150GM",
+        "image": "/menu-images/12ef253617055929.webp"
+      },
+      {
+        "id": "11-001",
+        "name": "Belgium Dark Choco",
+        "price": "₹110",
+        "description": "150GM",
+        "image": "/menu-images/560d96245dbf60d0.webp"
+      },
+      {
+        "id": "11-002",
+        "name": "Belgium White Choco",
+        "price": "₹110",
+        "description": "150GM",
+        "image": "/menu-images/98c438adfbadb8e7.webp"
+      },
+      {
+        "id": "11-003",
+        "name": "Dark & Milk",
+        "price": "₹125",
+        "description": "150GM",
+        "image": "/menu-images/a780dca2f93a2a59.webp"
+      },
+      {
+        "id": "11-004",
+        "name": "Milk & White",
+        "price": "₹125",
+        "description": "150GM",
+        "image": "/menu-images/c225fe9b526e5b44.webp"
+      },
+      {
+        "id": "11-005",
+        "name": "Kit Kat Waffle",
+        "price": "₹140",
+        "description": "150GM",
+        "image": "/menu-images/a91b687b3833df20.webp"
+      },
+      {
+        "id": "11-006",
+        "name": "Oreo Waffle",
+        "price": "₹140",
+        "description": "150GM",
+        "image": "/menu-images/53a00e1d7acfdafe.webp"
+      }
+    ]
+  },
+  {
+    "name": "Common Sandwiches",
+    "items": [
+      {
+        "id": "12-000",
+        "name": "Bread Butter",
+        "price": "₹80",
+        "description": "100-150 GM",
+        "image": "/menu-images/f91604fcade1829d.webp"
+      },
+      {
+        "id": "12-001",
+        "name": "Butter Jam S/W",
+        "price": "₹85",
+        "description": "100-150 GM",
+        "image": "/menu-images/d16b117ee8efc9e6.webp"
+      },
+      {
+        "id": "12-002",
+        "name": "Veg Sandwich",
+        "price": "₹85",
+        "description": "100-150 GM",
+        "image": "/menu-images/7034f3991bf5606c.webp"
+      },
+      {
+        "id": "12-003",
+        "name": "Chocolate S/W",
+        "price": "₹130",
+        "description": "100-150 GM",
+        "image": "/menu-images/ebbd76f9316e3253.webp"
+      },
+      {
+        "id": "12-004",
+        "name": "Veg Cheese S/W",
+        "price": "₹135",
+        "description": "100-150 GM",
+        "image": "/menu-images/0cc3fe74b65714d2.webp"
+      },
+      {
+        "id": "12-005",
+        "name": "Samosa S/W",
+        "price": "₹115",
+        "description": "100-150 GM",
+        "image": "/menu-images/297b359f67fd611b.webp"
+      },
+      {
+        "id": "12-006",
+        "name": "Samosa Cheese S/W",
+        "price": "₹150",
+        "description": "100-150 GM",
+        "image": "/menu-images/37c280cfe51faa56.webp"
+      },
+      {
+        "id": "12-007",
+        "name": "Cheese Chocolate S/W",
+        "price": "₹165",
+        "description": "100-150 GM",
+        "image": "/menu-images/3639156565cee4f3.webp"
+      },
+      {
+        "id": "12-008",
+        "name": "Aloo Mutter S/W",
+        "price": "₹100",
+        "description": "100-150 GM",
+        "image": "/menu-images/30563455f3da6436.webp"
+      },
+      {
+        "id": "12-009",
+        "name": "Aloo Cheese S/W",
+        "price": "₹135",
+        "description": "100-150 GM",
+        "image": "/menu-images/4f33d1e0be208e06.webp"
+      },
+      {
+        "id": "12-010",
+        "name": "Cheese Chutney S/W",
+        "price": "₹135",
+        "description": "100-150 GM",
+        "image": "/menu-images/83ac0b74447a799c.webp"
+      },
+      {
+        "id": "12-011",
+        "name": "Cheese Jam S/W",
+        "price": "₹135",
+        "description": "100-150 GM",
+        "image": "/menu-images/dadcecfd99221a21.webp"
+      },
+      {
+        "id": "12-012",
+        "name": "Cheese S/W",
+        "price": "₹145",
+        "description": "100-150 GM",
+        "image": "/menu-images/6e9e6a10e569d803.webp"
+      }
+    ]
+  },
+  {
+    "name": "Flavour Fusion S/W",
+    "items": [
+      {
+        "id": "13-000",
+        "name": "Coleslaw Grill",
+        "price": "₹160",
+        "description": "250-300 GM",
+        "image": "/menu-images/261a39594567d68f.webp"
+      },
+      {
+        "id": "13-001",
+        "name": "Cheese Chilli Garlic Grill",
+        "price": "₹199",
+        "description": "250-300 GM",
+        "image": "/menu-images/b5d2a006fc5dae39.webp"
+      },
+      {
+        "id": "13-002",
+        "name": "H2O (Spicy) Grill 🌶️",
+        "price": "₹199",
+        "description": "250-300 GM",
+        "image": "/menu-images/9cbf719e095757da.webp"
+      },
+      {
+        "id": "13-003",
+        "name": "Tandoori Grill",
+        "price": "₹199",
+        "description": "250-300 GM",
+        "image": "/menu-images/6bd7539a15be0fbe.webp"
+      },
+      {
+        "id": "13-004",
+        "name": "Junglee Grill",
+        "price": "₹199",
+        "description": "250-300 GM",
+        "image": "/menu-images/2b95fad7e64ebf40.webp"
+      },
+      {
+        "id": "13-005",
+        "name": "Punjabi Tadka Grill",
+        "price": "₹199",
+        "description": "250-300 GM",
+        "image": "/menu-images/0be0bed0d21371df.webp"
+      },
+      {
+        "id": "13-006",
+        "name": "Mexican Grill",
+        "price": "₹199",
+        "description": "250-300 GM",
+        "image": "/menu-images/e1c0ce207cf1c0f7.webp"
+      },
+      {
+        "id": "13-007",
+        "name": "Peri Peri Grill",
+        "price": "₹199",
+        "description": "250-300 GM",
+        "image": "/menu-images/e79bc2c16ec512a9.webp"
+      },
+      {
+        "id": "13-008",
+        "name": "Corn & Capsicum Grill",
+        "price": "₹199",
+        "description": "250-300 GM",
+        "image": "/menu-images/4a695e31dcf7dfb4.webp"
+      },
+      {
+        "id": "13-009",
+        "name": "Italian Grill",
+        "price": "₹210",
+        "description": "250-300 GM",
+        "image": "/menu-images/0a4a78978392f0d2.webp"
+      }
+    ]
+  },
+  {
+    "name": "Club House",
+    "items": [
+      {
+        "id": "14-000",
+        "name": "Vegetable Club",
+        "price": "₹245",
+        "description": "350 GM",
+        "image": "/menu-images/646d74dd6a2dab4e.webp"
+      },
+      {
+        "id": "14-001",
+        "name": "Jumbo Club",
+        "price": "₹245",
+        "description": "350 GM",
+        "image": "/menu-images/2f3c16b2bd7723f6.webp"
+      },
+      {
+        "id": "14-002",
+        "name": "American Club (Sweet)",
+        "price": "₹245",
+        "description": "350 GM",
+        "image": "/menu-images/6cf4f683ff423ed5.webp"
+      },
+      {
+        "id": "14-003",
+        "name": "Veg. & Herbs Club",
+        "price": "₹245",
+        "description": "350 GM",
+        "image": "/menu-images/691f7580895b4017.webp"
+      },
+      {
+        "id": "14-004",
+        "name": "Paneer Makhani Club",
+        "price": "₹250",
+        "description": "350 GM",
+        "image": "/menu-images/ffdc82b864f0120d.webp"
+      },
+      {
+        "id": "14-005",
+        "name": "Schezwan Club Spicy 🌶️",
+        "price": "₹260",
+        "description": "350 GM",
+        "image": "/menu-images/bf1d16b29b63b0cc.webp"
+      },
+      {
+        "id": "14-006",
+        "name": "Shiva's Spl. Italian Club",
+        "price": "₹280",
+        "description": "350 GM",
+        "image": "/menu-images/aefa5e6ded262ade.webp"
+      }
+    ]
+  },
+  {
+    "name": "Panini Paradise",
+    "items": [
+      {
+        "id": "15-000",
+        "name": "Cheese Veggie Panini",
+        "price": "₹199",
+        "description": "250GM - 300GM",
+        "image": "/menu-images/a4206a0973918a6a.webp"
+      },
+      {
+        "id": "15-001",
+        "name": "Corn Cheese Panini",
+        "price": "₹199",
+        "description": "250GM - 300GM",
+        "image": "/menu-images/4a139600392348f2.webp"
+      },
+      {
+        "id": "15-002",
+        "name": "Mexican Panini",
+        "price": "₹199",
+        "description": "250GM - 300GM",
+        "image": "/menu-images/02f4102c3bc42c33.webp"
+      },
+      {
+        "id": "15-003",
+        "name": "Tandoori Crunch Panini",
+        "price": "₹199",
+        "description": "250GM - 300GM",
+        "image": "/menu-images/b19b7800ad9d7a4b.webp"
+      },
+      {
+        "id": "15-004",
+        "name": "Peri Peri Panini",
+        "price": "₹199",
+        "description": "250GM - 300GM",
+        "image": "/menu-images/916f1dc5b192d7a4.webp"
+      },
+      {
+        "id": "15-005",
+        "name": "H2O (Spicy) Panini 🌶️",
+        "price": "₹199",
+        "description": "250GM - 300GM",
+        "image": "/menu-images/9cbf719e095757da.webp"
+      }
+    ]
+  },
+  {
+    "name": "Toast & Taste",
+    "items": [
+      {
+        "id": "16-000",
+        "name": "Cheese Chilli Toast",
+        "price": "₹199",
+        "description": "2 SLICE",
+        "image": "/menu-images/501e39b85fe55cc9.webp"
+      },
+      {
+        "id": "16-001",
+        "name": "Cheese Chilli Garlic Toast",
+        "price": "₹199",
+        "description": "2 SLICE",
+        "image": "/menu-images/50c77c41bb1f5964.webp"
+      },
+      {
+        "id": "16-002",
+        "name": "Cheese Chilli Corn Toast",
+        "price": "₹199",
+        "description": "2 SLICE",
+        "image": "/menu-images/40d4b58a4163a7c5.webp"
+      },
+      {
+        "id": "16-003",
+        "name": "Italian Toast",
+        "price": "₹210",
+        "description": "2 SLICE",
+        "image": "/menu-images/9f83a7e97b2e71cf.webp"
+      }
+    ]
+  },
+  {
+    "name": "Pizza Planet (Soft Base)",
+    "items": [
+      {
+        "id": "17-000",
+        "name": "Margherita",
+        "price": "₹155",
+        "description": "200-220GM",
+        "image": "/menu-images/a6c6f00739e8c776.webp"
+      },
+      {
+        "id": "17-001",
+        "name": "Margherita Double Cheese",
+        "price": "₹175",
+        "description": "200-220GM",
+        "image": "/menu-images/3cb2683de563ba10.webp"
+      },
+      {
+        "id": "17-002",
+        "name": "Veg. Pizza",
+        "price": "₹170",
+        "description": "200-220GM",
+        "image": "/menu-images/f5ebf4ef43267bfa.webp"
+      },
+      {
+        "id": "17-003",
+        "name": "Tandoori Paneer Pizza",
+        "price": "₹180",
+        "description": "200-220GM",
+        "image": "/menu-images/42b85ac02fb865ba.webp"
+      },
+      {
+        "id": "17-004",
+        "name": "Hot & Spicy Pizza 🌶️",
+        "price": "₹175",
+        "description": "200-220GM",
+        "image": "/menu-images/9c81b04d123e8e3d.webp"
+      },
+      {
+        "id": "17-005",
+        "name": "Peri Peri Pizza",
+        "price": "₹175",
+        "description": "200-220GM",
+        "image": "/menu-images/57545fc2afe59487.webp"
+      },
+      {
+        "id": "17-006",
+        "name": "Fresh Veggi Pizza",
+        "price": "₹190",
+        "description": "200-220GM",
+        "image": "/menu-images/0685b37f83716b7e.webp"
+      },
+      {
+        "id": "17-007",
+        "name": "Yum Dum Pizza 🌶️",
+        "price": "₹185",
+        "description": "200-220GM",
+        "image": "/menu-images/1060af876da3598b.webp"
+      },
+      {
+        "id": "17-008",
+        "name": "Shiva's Spl. Pizza",
+        "price": "₹199",
+        "description": "200-220GM",
+        "image": "/menu-images/2e9dc9bd9c0d9725.webp"
+      }
+    ]
+  },
+  {
+    "name": "Thin Crust Pizza",
+    "items": [
+      {
+        "id": "18-000",
+        "name": "Italian Pizza",
+        "price": "₹160",
+        "description": "200-220GM",
+        "image": "/menu-images/c81d88e4071c7178.webp"
+      },
+      {
+        "id": "18-001",
+        "name": "Chilli Garlic Pizza 🌶️",
+        "price": "₹175",
+        "description": "200-220GM",
+        "image": "/menu-images/a5891dbcfd3a72e9.webp"
+      },
+      {
+        "id": "18-002",
+        "name": "Mexican Baked Pizza",
+        "price": "₹175",
+        "description": "200-220GM",
+        "image": "/menu-images/dedad5e7dbd017f2.webp"
+      },
+      {
+        "id": "18-003",
+        "name": "Cheese Bake Pizza",
+        "price": "₹175",
+        "description": "200-220GM",
+        "image": "/menu-images/c368c4d130aa7aa5.webp"
+      },
+      {
+        "id": "18-004",
+        "name": "Double Cheese Pizza",
+        "price": "₹185",
+        "description": "200-220GM",
+        "image": "/menu-images/c017ee16115bc6e8.webp"
+      },
+      {
+        "id": "18-005",
+        "name": "Farali Pizza",
+        "price": "₹170",
+        "description": "200-220GM",
+        "image": "/menu-images/7b883bd7fbba49eb.webp"
+      }
+    ]
+  },
+  {
+    "name": "Bread Magic",
+    "items": [
+      {
+        "id": "19-000",
+        "name": "Garlic Bread",
+        "price": "₹100",
+        "description": "150GM (4 PCS)",
+        "image": "/menu-images/32e8335115ae5054.webp"
+      },
+      {
+        "id": "19-001",
+        "name": "Cheese Garlic Bread",
+        "price": "₹150",
+        "description": "150GM (4 PCS)",
+        "image": "/menu-images/c22713bbca604bcc.webp"
+      },
+      {
+        "id": "19-002",
+        "name": "Paneer Spicy Garlic Bread 🌶️",
+        "price": "₹175",
+        "description": "150GM (4 PCS)",
+        "image": "/menu-images/e042dd7fc1a56056.webp"
+      },
+      {
+        "id": "19-003",
+        "name": "Premium Garlic Bread",
+        "price": "₹200",
+        "description": "150GM (4 PCS)",
+        "image": "/menu-images/acf66708b2f6a532.webp"
+      }
+    ]
+  },
+  {
+    "name": "Pasta La' Vista",
+    "items": [
+      {
+        "id": "20-000",
+        "name": "Arrabiata Pasta 🌶️",
+        "price": "₹239",
+        "description": "300GM",
+        "image": "/menu-images/294cc8c4441cfd74.webp"
+      },
+      {
+        "id": "20-001",
+        "name": "Alfredo Pasta",
+        "price": "₹239",
+        "description": "300GM",
+        "image": "/menu-images/299437d4f16b1711.webp"
+      },
+      {
+        "id": "20-002",
+        "name": "Mix Sauce Pasta",
+        "price": "₹239",
+        "description": "300GM",
+        "image": "/menu-images/8d0a896fb36d70bf.webp"
+      },
+      {
+        "id": "20-003",
+        "name": "Makhani Pasta",
+        "price": "₹239",
+        "description": "300GM",
+        "image": "/menu-images/2548f1c8e3d26f03.webp"
+      }
+    ]
+  },
+  {
+    "name": "Burger Box",
+    "items": [
+      {
+        "id": "21-000",
+        "name": "Aloo Tikki Burger",
+        "price": "₹95",
+        "description": "120GM - 150GM",
+        "image": "/menu-images/9eda84a1ce737217.webp"
+      },
+      {
+        "id": "21-001",
+        "name": "Tandoori Burger",
+        "price": "₹105",
+        "description": "120GM - 150GM",
+        "image": "/menu-images/60652a8a01844ce8.webp"
+      },
+      {
+        "id": "21-002",
+        "name": "Veg Burger",
+        "price": "₹115",
+        "description": "120GM - 150GM",
+        "image": "/menu-images/d9e0e99343f4f727.webp"
+      },
+      {
+        "id": "21-003",
+        "name": "Veg. Cheese Burger",
+        "price": "₹160",
+        "description": "120GM - 150GM",
+        "image": "/menu-images/2b8263cb6f2cd4d6.webp"
+      },
+      {
+        "id": "21-004",
+        "name": "Peri Peri Burger",
+        "price": "₹125",
+        "description": "120GM - 150GM",
+        "image": "/menu-images/c417dcdccdf7deaf.webp"
+      },
+      {
+        "id": "21-005",
+        "name": "Paneer Makhani Burger",
+        "price": "₹140",
+        "description": "120GM - 150GM",
+        "image": "/menu-images/954514aec49f7f1d.webp"
+      },
+      {
+        "id": "21-006",
+        "name": "Spicy Paneer Burger 🌶️",
+        "price": "₹180",
+        "description": "120GM - 150GM",
+        "image": "/menu-images/d2578ccb744fba27.webp"
+      }
+    ]
+  },
+  {
+    "name": "Fry N' Joy",
+    "items": [
+      {
+        "id": "22-000",
+        "name": "French Fries",
+        "price": "₹115",
+        "description": "110 GM",
+        "image": "/menu-images/b4a7337a0f8e5588.webp"
+      },
+      {
+        "id": "22-001",
+        "name": "Cheese French Fries",
+        "price": "₹175",
+        "description": "110 GM",
+        "image": "/menu-images/8ab8d654d2d89ea6.webp"
+      },
+      {
+        "id": "22-002",
+        "name": "Peri Peri Fries",
+        "price": "₹165",
+        "description": "110 GM",
+        "image": "/menu-images/868f33357f60edb5.webp"
+      },
+      {
+        "id": "22-003",
+        "name": "Chilli Garlic Fries",
+        "price": "₹165",
+        "description": "110 GM",
+        "image": "/menu-images/b24101bb7f115900.webp"
+      }
+    ]
+  },
+  {
+    "name": "All About Frankie",
+    "items": [
+      {
+        "id": "23-000",
+        "name": "Veg. Frankie",
+        "price": "₹130",
+        "description": "120GM-180GM",
+        "image": "/menu-images/7e32765bdff4c2ac.webp"
+      },
+      {
+        "id": "23-001",
+        "name": "Veg. cheese Frankie",
+        "price": "₹160",
+        "description": "120GM-180GM",
+        "image": "/menu-images/49e6b5bdaf72328b.webp"
+      },
+      {
+        "id": "23-002",
+        "name": "Schezwan Cheese Frankie 🌶️",
+        "price": "₹180",
+        "description": "120GM-180GM",
+        "image": "/menu-images/c5a190cdaa657a25.webp"
+      },
+      {
+        "id": "23-003",
+        "name": "Paneer Tikka Frankie",
+        "price": "₹199",
+        "description": "120GM-180GM",
+        "image": "/menu-images/e4bfad2987cc061d.webp"
+      },
+      {
+        "id": "23-004",
+        "name": "Paneer Crunchy Frankie",
+        "price": "₹199",
+        "description": "120GM-180GM",
+        "image": "/menu-images/b232c92ab0ad3063.webp"
+      },
+      {
+        "id": "23-005",
+        "name": "Shivas Spl. Frankie",
+        "price": "₹210",
+        "description": "120GM-180GM",
+        "image": "/menu-images/d6ef854ca4749797.webp"
+      }
+    ]
+  },
+  {
+    "name": "Desi Chaat",
+    "items": [
+      {
+        "id": "24-000",
+        "name": "Samosa (2 pcs)",
+        "price": "₹100",
+        "description": "180gm",
+        "image": "/menu-images/9e4c13d961a8e057.webp"
+      },
+      {
+        "id": "24-001",
+        "name": "Samosa Chaat",
+        "price": "₹125",
+        "description": "150gm",
+        "image": "/menu-images/7729d2ecb84a0e85.webp"
+      },
+      {
+        "id": "24-002",
+        "name": "Bombay Bhel",
+        "price": "₹120",
+        "description": "200gm",
+        "image": "/menu-images/a255c92cd26c3495.webp"
+      },
+      {
+        "id": "24-003",
+        "name": "Cheese Bhel",
+        "price": "₹180",
+        "description": "220gm",
+        "image": "/menu-images/563294fb55e14a05.webp"
+      },
+      {
+        "id": "24-004",
+        "name": "Sev puri",
+        "price": "₹120",
+        "description": "180gm",
+        "image": "/menu-images/d4f9e81c8ba708c0.webp"
+      },
+      {
+        "id": "24-005",
+        "name": "Cheese Sev Puri",
+        "price": "₹180",
+        "description": "200gm",
+        "image": "/menu-images/7c6039c220ba7ed6.webp"
+      },
+      {
+        "id": "24-006",
+        "name": "Farali Bhel",
+        "price": "₹140",
+        "description": "180gm",
+        "image": "/menu-images/5053465bf92d3d53.webp"
+      }
+    ]
+  },
+  {
+    "name": "Maggi",
+    "items": [
+      {
+        "id": "25-000",
+        "name": "Masala Maggi",
+        "price": "₹85",
+        "description": "",
+        "image": "/menu-images/b06bae61c031d3da.webp"
+      },
+      {
+        "id": "25-001",
+        "name": "Veg. Maggi",
+        "price": "₹95",
+        "description": "",
+        "image": "/menu-images/e5a1195a7b85abb2.webp"
+      },
+      {
+        "id": "25-002",
+        "name": "Schezwan Maggi 🌶️",
+        "price": "₹105",
+        "description": "",
+        "image": "/menu-images/db2543d2e2629569.webp"
+      }
+    ]
+  },
+  {
+    "name": "Pav Bhaji",
+    "items": [
+      {
+        "id": "26-000",
+        "name": "Pav-Bhaji (250gm)",
+        "price": "₹155",
+        "description": "",
+        "image": "/menu-images/61a33c4d3ef15ecb.webp"
+      },
+      {
+        "id": "26-001",
+        "name": "Extra Pav (2 Pcs)",
+        "price": "₹35",
+        "description": "",
+        "image": "/menu-images/0acaecdd1ccb70ba.webp"
+      },
+      {
+        "id": "26-002",
+        "name": "Extra Bhaji (250gm)",
+        "price": "₹130",
+        "description": "",
+        "image": "/menu-images/61a33c4d3ef15ecb.webp"
+      }
+    ]
+  },
+  {
+    "name": "Pulav",
+    "items": [
+      {
+        "id": "27-000",
+        "name": "Veg Pulav",
+        "price": "₹160",
+        "description": "320gm",
+        "image": "/menu-images/675d22464e9f216f.webp"
+      },
+      {
+        "id": "27-001",
+        "name": "Paneer Pulav",
+        "price": "₹180",
+        "description": "320gm",
+        "image": "/menu-images/b521f6ea886c8a2f.webp"
+      },
+      {
+        "id": "27-002",
+        "name": "Kaju Pulav",
+        "price": "₹180",
+        "description": "320gm",
+        "image": "/menu-images/46d871945ed5a435.webp"
+      }
+    ]
+  },
+  {
+    "name": "Parathas",
+    "items": [
+      {
+        "id": "28-000",
+        "name": "Aloo Paratha (1pc)",
+        "price": "₹110",
+        "description": "",
+        "image": "/menu-images/36050d78e0abc074.webp"
+      },
+      {
+        "id": "28-001",
+        "name": "Cheese Aloo Paratha (1pc)",
+        "price": "₹140",
+        "description": "",
+        "image": "/menu-images/81306406cc7be98e.webp"
+      },
+      {
+        "id": "28-002",
+        "name": "Paneer Aloo Paratha (1pc)",
+        "price": "₹140",
+        "description": "",
+        "image": "/menu-images/a6e36eb6c67e46f7.webp"
+      },
+      {
+        "id": "28-003",
+        "name": "Cheese Paratha (1pc)",
+        "price": "₹170",
+        "description": "",
+        "image": "/menu-images/4a2bc4c0d56907dc.webp"
+      }
+    ]
+  },
+  {
+    "name": "Channa Kulcha",
+    "items": [
+      {
+        "id": "29-000",
+        "name": "Chana Kulcha (200gm)",
+        "price": "₹180",
+        "description": "",
+        "image": "/menu-images/48650a58c341e2b6.webp"
+      },
+      {
+        "id": "29-001",
+        "name": "Extra Chana (200gm)",
+        "price": "₹130",
+        "description": "",
+        "image": "/menu-images/de07b0363a0c0ab4.webp"
+      },
+      {
+        "id": "29-002",
+        "name": "Extra Kulcha (1 Pc)",
+        "price": "₹45",
+        "description": "",
+        "image": "/menu-images/9286c443eaa80c0e.webp"
+      }
+    ]
+  },
+  {
+    "name": "Add-on",
+    "items": [
+      {
+        "id": "30-000",
+        "name": "Extra Topping",
+        "price": "₹15",
+        "description": "",
+        "image": "/menu-images/197fb5ecedaf528a.webp"
+      },
+      {
+        "id": "30-001",
+        "name": "Extra Ice Cream",
+        "price": "₹30",
+        "description": "",
+        "image": "/menu-images/837310095a9ebff5.webp"
+      },
+      {
+        "id": "30-002",
+        "name": "Extra Butter",
+        "price": "₹15",
+        "description": "",
+        "image": "/menu-images/521f24f6d56d1356.webp"
+      },
+      {
+        "id": "30-003",
+        "name": "Extra Cheese",
+        "price": "₹35",
+        "description": "",
+        "image": "/menu-images/34dda5d3caa59be1.webp"
+      }
+    ]
+  },
+  {
+    "name": "Dessert",
+    "items": [
+      {
+        "id": "31-000",
+        "name": "Brownie",
+        "price": "₹130",
+        "description": "",
+        "image": "/menu-images/6b2a3d84d38d9f8a.webp"
+      },
+      {
+        "id": "31-001",
+        "name": "Brownie with Ice Cream",
+        "price": "₹180",
+        "description": "",
+        "image": "/menu-images/d03744e24bd73353.webp"
+      },
+      {
+        "id": "31-002",
+        "name": "Sizzling Brownie",
+        "price": "₹200",
+        "description": "",
+        "image": "/menu-images/95433061f79c0b14.webp"
+      }
+    ]
+  },
+  {
+    "name": "Chinese Special",
+    "items": [
+      {
+        "id": "32-000",
+        "name": "Manchurian Dry",
+        "price": "₹155",
+        "description": "",
+        "image": "/menu-images/bfb7f381de37a662.webp"
+      },
+      {
+        "id": "32-001",
+        "name": "Manchurian Gravy",
+        "price": "₹165",
+        "description": "",
+        "image": "/menu-images/47d990c4304c15d2.webp"
+      },
+      {
+        "id": "32-002",
+        "name": "Hakka Noodle",
+        "price": "₹155",
+        "description": "",
+        "image": "/menu-images/2aa407a7747e8584.webp"
+      },
+      {
+        "id": "32-003",
+        "name": "Schezwan Noodle",
+        "price": "₹170",
+        "description": "",
+        "image": "/menu-images/2010cb9f635a645b.webp"
+      },
+      {
+        "id": "32-004",
+        "name": "Chilli Garlic Noodle",
+        "price": "₹175",
+        "description": "",
+        "image": "/menu-images/26094a0b97c67cc4.webp"
+      },
+      {
+        "id": "32-005",
+        "name": "Manchurian Noodle",
+        "price": "₹180",
+        "description": "",
+        "image": "/menu-images/c9a625bcefdeabfc.webp"
+      },
+      {
+        "id": "32-006",
+        "name": "Veg. Fried Rice",
+        "price": "₹160",
+        "description": "",
+        "image": "/menu-images/019eecdc3fbc8816.webp"
+      },
+      {
+        "id": "32-007",
+        "name": "Manchurian Fried Rice",
+        "price": "₹170",
+        "description": "",
+        "image": "/menu-images/9204a54511356bcb.webp"
+      },
+      {
+        "id": "32-008",
+        "name": "Noodle Fried Rice",
+        "price": "₹170",
+        "description": "",
+        "image": "/menu-images/ef2dfd64b282c22c.webp"
+      },
+      {
+        "id": "32-009",
+        "name": "Schezwan Fried Rice",
+        "price": "₹175",
+        "description": "",
+        "image": "/menu-images/03193fccfba017d2.webp"
+      }
+    ]
+  },
+  {
+    "name": "Combo Offers",
+    "items": [
+      {
+        "id": "33-000",
+        "name": "MAIN AKELA",
+        "price": "₹170",
+        "description": "Aloo Tikki Burger + Chocolate Milkshake · Save ₹40 (was ₹210)",
+        "image": "/menu-images/9eda84a1ce737217.webp"
+      },
+      {
+        "id": "33-001",
+        "name": "HUM DO",
+        "price": "₹459",
+        "description": "Peri Peri Grill Sandwich + French Fries + Cold Coffee + Green Apple Mojito · Save ₹100 (was ₹559)",
+        "image": "/menu-images/e79bc2c16ec512a9.webp"
+      },
+      {
+        "id": "33-002",
+        "name": "SINGLE MINGLE",
+        "price": "₹244",
+        "description": "Cheese Corn Panini + Cold Coffee · Save ₹60 (was ₹304)",
+        "image": "/menu-images/4a139600392348f2.webp"
+      },
+      {
+        "id": "33-003",
+        "name": "YARRA",
+        "price": "₹545",
+        "description": "Veg & Cheese Burger + 6-inch Veg Pizza + Cold Bourn Vita + Strawberry Thick Shake · Save ₹130 (was ₹675)",
+        "image": "/menu-images/2b8263cb6f2cd4d6.webp"
+      },
+      {
+        "id": "33-004",
+        "name": "PARIVAR",
+        "price": "₹669",
+        "description": "Fresh Veggie Pizza + Tandoori Grilled Sandwich + Veg Burger + Cold Coffee + Watermelon Mojito · Save ₹150 (was ₹819)",
+        "image": "/menu-images/0685b37f83716b7e.webp"
+      }
+    ]
+  }
+]
