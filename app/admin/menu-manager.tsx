@@ -13,16 +13,66 @@ type MenuItem = {
 };
 type Category = { id: string; name: string; sortOrder: number; items: MenuItem[] };
 
+const ACCEPTED_IMAGE_TYPES = "image/*,.heic,.heif,.jpg,.jpeg,.png,.webp,.gif,.avif,.bmp,.svg,.jfif,.tiff,.ico";
+
 async function compressImage(file: File): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const img = new Image();
-      img.onload = () => {
+  const fileName = (file.name || "").toLowerCase();
+  const fileType = (file.type || "").toLowerCase();
+
+  // 1. Vector SVG: directly read as base64 data URL to preserve 100% crispness
+  if (fileType.includes("svg") || fileName.endsWith(".svg")) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  // 2. iPhone Apple HEIC / HEIF format conversion
+  let targetBlob: Blob = file;
+  if (
+    fileType.includes("heic") ||
+    fileType.includes("heif") ||
+    fileName.endsWith(".heic") ||
+    fileName.endsWith(".heif")
+  ) {
+    try {
+      const heic2any = (await import("heic2any")).default;
+      const converted = await heic2any({
+        blob: file,
+        toType: "image/jpeg",
+        quality: 0.88,
+      });
+      targetBlob = Array.isArray(converted) ? converted[0] : converted;
+    } catch (err) {
+      console.warn("heic2any conversion fallback:", err);
+    }
+  }
+
+  // 3. Small Animated GIFs: preserve animation
+  if ((fileType.includes("gif") || fileName.endsWith(".gif")) && file.size < 600 * 1024) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  // 4. Standard bitmap processing (JPG, PNG, WebP, AVIF, BMP, TIFF, JFIF, etc.)
+  return new Promise((resolve) => {
+    const objectUrl = URL.createObjectURL(targetBlob);
+    const img = new Image();
+
+    img.onload = () => {
+      URL.revokeObjectURL(objectUrl);
+      try {
         const canvas = document.createElement("canvas");
         const MAX_DIM = 640;
         let width = img.width;
         let height = img.height;
+
         if (width > height) {
           if (width > MAX_DIM) {
             height = Math.round((height * MAX_DIM) / width);
@@ -34,19 +84,43 @@ async function compressImage(file: File): Promise<string> {
             height = MAX_DIM;
           }
         }
-        canvas.width = width;
-        canvas.height = height;
+
+        canvas.width = Math.max(width, 1);
+        canvas.height = Math.max(height, 1);
         const ctx = canvas.getContext("2d");
-        if (!ctx) return resolve(e.target?.result as string);
+        if (!ctx) {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result as string);
+          reader.readAsDataURL(targetBlob);
+          return;
+        }
+
         ctx.drawImage(img, 0, 0, width, height);
-        const dataUrl = canvas.toDataURL("image/webp", 0.82);
+
+        // Try modern WebP, fall back to JPEG if browser doesn't export WebP
+        let dataUrl = canvas.toDataURL("image/webp", 0.82);
+        if (!dataUrl.startsWith("data:image/webp")) {
+          dataUrl = canvas.toDataURL("image/jpeg", 0.82);
+        }
         resolve(dataUrl);
-      };
-      img.onerror = reject;
-      img.src = e.target?.result as string;
+      } catch (err) {
+        console.warn("Canvas compression fallback:", err);
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result as string);
+        reader.readAsDataURL(targetBlob);
+      }
     };
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
+
+    img.onerror = () => {
+      URL.revokeObjectURL(objectUrl);
+      // Safe fallback: read target blob directly
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = () => resolve("");
+      reader.readAsDataURL(targetBlob);
+    };
+
+    img.src = objectUrl;
   });
 }
 
@@ -400,10 +474,10 @@ function NewItemForm({
           </div>
         ) : null}
         <label className="image-upload-button">
-          <span>{uploading ? "Compressing…" : "📷 Upload photo"}</span>
+          <span>{uploading ? "Processing photo…" : "📷 Upload photo"}</span>
           <input
             type="file"
-            accept="image/*"
+            accept={ACCEPTED_IMAGE_TYPES}
             style={{ display: "none" }}
             disabled={busy || uploading}
             onChange={handleFileSelect}
@@ -513,11 +587,11 @@ function ItemEditor({
           <div className="manage-thumb image-placeholder">S</div>
         )}
         {outOfStock && <span className="mini-oos-badge">OOS</span>}
-        <label className="thumb-upload-overlay" title="Upload new photo">
+        <label className="thumb-upload-overlay" title="Upload new photo (JPG, PNG, HEIC, WebP, SVG, AVIF, BMP, etc.)">
           <span>{uploading ? "…" : "📷"}</span>
           <input
             type="file"
-            accept="image/*"
+            accept={ACCEPTED_IMAGE_TYPES}
             style={{ display: "none" }}
             disabled={busy || uploading}
             onChange={handlePhotoUpload}
@@ -546,10 +620,10 @@ function ItemEditor({
         <div className="manage-field-row secondary-fields">
           <div className="new-item-image-row">
             <label className="image-upload-button small-button">
-              <span>{uploading ? "…" : "📷 Photo"}</span>
+              <span>{uploading ? "Processing…" : "📷 Photo"}</span>
               <input
                 type="file"
-                accept="image/*"
+                accept={ACCEPTED_IMAGE_TYPES}
                 style={{ display: "none" }}
                 disabled={busy || uploading}
                 onChange={handlePhotoUpload}
