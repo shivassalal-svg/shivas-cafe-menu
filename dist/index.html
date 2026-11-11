@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f4ed">
+  <meta name="description" content="A simple, view-only digital menu for Shiva's Cafe.">
+  <title>Shiva’s Cafe · Menu Studio</title>
+  <style>
+    :root{--ink:#193b32;--muted:#718078;--paper:#f7f4ed;--card:#fffdf8;--line:#e9e5db;--leaf:#285b49;--leaf2:#e4eee6;--orange:#d8784d;--shadow:0 16px 45px #1b39220d}
+    *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,textarea{font:inherit}button{cursor:pointer}
+    .shell{max-width:1160px;margin:auto;padding:28px 24px 72px}.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:50px}.brand{display:flex;gap:12px;align-items:center;font-weight:750;letter-spacing:-.03em}.mark{width:39px;height:39px;border-radius:13px;background:var(--leaf);color:white;display:grid;place-items:center;font-family:Georgia,serif;font-size:22px}.brand small{display:block;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-top:2px}.top-actions{display:flex;gap:10px}.button{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:11px 17px;font-size:13px;font-weight:700;transition:.18s}.button:hover{transform:translateY(-1px);box-shadow:var(--shadow)}.button.primary{background:var(--leaf);color:white;border-color:var(--leaf)}.button.ghost{background:transparent}.button.danger{color:#a74736;border-color:#edd5ce;background:#fff9f7}.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:var(--orange);font-weight:800}.hero{max-width:690px;margin:0 auto 30px;text-align:center}.hero h1{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.055em;font-size:clamp(45px,7vw,82px);line-height:.98;margin:14px 0 16px;font-weight:500}.hero p{margin:0 auto;color:var(--muted);font-size:16px;line-height:1.65;max-width:520px}.tabs{display:flex;justify-content:center;gap:9px;margin:28px auto 38px}.tabs .button{padding:10px 18px}.panel{background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow)}.dashboard{max-width:940px;margin:auto}.dash-head{padding:25px 27px 22px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:16px}.dash-head h2{font-family:Georgia,serif;font-size:28px;letter-spacing:-.035em;font-weight:500;margin:4px 0}.dash-head p{margin:0;color:var(--muted);font-size:13px}.dash-body{padding:22px 27px 28px}.category{border:1px solid var(--line);border-radius:16px;margin-bottom:14px;overflow:hidden;background:#fffefa}.category-head{display:flex;align-items:center;justify-content:space-between;padding:14px 15px;background:#fbfaf5}.category-title{display:flex;align-items:center;gap:10px}.category-title input{font-weight:750;font-size:16px;color:var(--ink);border:0;background:transparent;padding:5px 3px;min-width:180px;outline:0}.count{color:var(--muted);font-size:11px}.cat-actions{display:flex;align-items:center;gap:8px}.icon-button{border:0;background:transparent;color:var(--muted);padding:7px;border-radius:9px}.icon-button:hover{background:#f2eee6;color:var(--ink)}.items{padding:4px 15px 13px}.item{display:grid;grid-template-columns:minmax(130px,1.2fr) minmax(100px,.8fr) minmax(120px,1.3fr) 34px;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid #f0ede6}.item:last-of-type{border-bottom:0}.field{width:100%;border:1px solid transparent;border-radius:8px;background:transparent;padding:9px 10px;font-size:13px;color:var(--ink);outline:0}.field:focus{border-color:#cad8cb;background:white}.field::placeholder{color:#a5aaa2}.add-row{display:flex;gap:8px;margin-top:8px}.add-row .field{background:white;border-color:var(--line)}.add-row .field.name{flex:1}.add-row .field.price{width:115px}.add-row .field.desc{flex:1.2}.add-row .button{white-space:nowrap}.add-category{margin:7px 0 0}.dash-foot{border-top:1px solid var(--line);padding:20px 27px;display:flex;justify-content:space-between;align-items:center;gap:18px}.helper{font-size:12px;color:var(--muted);line-height:1.5;max-width:470px}.status{font-size:12px;color:var(--leaf);font-weight:700;min-height:16px}.qr-layout{display:grid;grid-template-columns:1fr 300px;gap:20px;margin-top:20px}.qr-info{padding:22px}.qr-info h3{font-family:Georgia,serif;font-weight:500;font-size:24px;margin:0 0 7px}.qr-info p{font-size:13px;line-height:1.6;color:var(--muted);margin:0 0 16px}.share-url{display:flex;gap:8px}.share-url input{min-width:0;flex:1}.qr-card{padding:18px;display:flex;flex-direction:column;align-items:center;text-align:center}.qr-card img{width:190px;height:190px;image-rendering:pixelated;border-radius:8px;background:white;padding:8px}.qr-card .button{margin-top:12px}.qr-caption{font-size:11px;color:var(--muted);margin-top:9px}.menu-view{max-width:800px;margin:auto}.menu-cover{padding:38px 24px 30px;text-align:center;background:var(--leaf);color:#fffdf8;border-radius:24px 24px 0 0}.menu-cover .eyebrow{color:#eab08e}.menu-cover h1{font-family:Georgia,serif;font-size:clamp(44px,8vw,72px);letter-spacing:-.055em;font-weight:500;margin:12px 0 8px}.menu-cover p{color:#d6e5db;margin:0;font-size:14px}.menu-sections{padding:12px 26px 28px;border-radius:0 0 24px 24px}.menu-category{padding:22px 0 17px;border-bottom:1px solid var(--line)}.menu-category:last-child{border:0}.menu-category h2{font-family:Georgia,serif;font-size:26px;font-weight:500;margin:0 0 11px}.menu-entry{display:flex;justify-content:space-between;gap:20px;align-items:baseline;padding:9px 0}.entry-copy{min-width:0}.entry-name{font-weight:700;font-size:14px}.entry-desc{font-size:12px;color:var(--muted);margin-top:3px;line-height:1.45}.entry-price{white-space:nowrap;font-size:13px;font-weight:750;color:var(--leaf)}.empty{color:var(--muted);font-size:13px;padding:8px 0}.notice{padding:14px 16px;background:#f0f4ee;border:1px solid #dce7db;color:#4c6657;font-size:12px;line-height:1.5;border-radius:12px;margin:14px 0}.footer{text-align:center;color:var(--muted);font-size:11px;padding:24px 0 0}.hidden{display:none!important}
+    @media(max-width:720px){.shell{padding:18px 15px 46px}.topbar{margin-bottom:37px}.brand{font-size:14px}.top-actions .button{padding:9px 12px}.hero h1{font-size:54px}.dash-head,.dash-body,.dash-foot{padding-left:17px;padding-right:17px}.dash-head{align-items:flex-start}.dash-head .button{padding:9px 12px}.item{grid-template-columns:1fr 90px 34px}.item .desc-col{grid-column:1/3;grid-row:2;padding-top:0}.add-row{flex-wrap:wrap}.add-row .field.name{flex-basis:100%}.add-row .field.price,.add-row .field.desc{flex:1;width:auto}.qr-layout{grid-template-columns:1fr}.qr-card{grid-row:1}.qr-card img{width:172px;height:172px}.dash-foot{align-items:flex-start;flex-direction:column}.category-title input{min-width:130px}.menu-sections{padding-left:19px;padding-right:19px}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand"><div class="mark">S</div><div>Shiva’s Cafe<small>Menu Studio</small></div></div>
+      <div class="top-actions"><button class="button ghost" id="resetBtn" type="button">Reset draft</button><button class="button primary" id="viewBtn" type="button">View menu ↗</button></div>
+    </header>
+    <section class="hero" id="studioHero">
+      <div class="eyebrow">A little something for every appetite</div>
+      <h1>Good food,<br>easy to browse.</h1>
+      <p>Keep your menu up to date, then share the view-only version with a QR code at your table.</p>
+      <div class="tabs"><button class="button primary" id="manageTab" type="button">Manage menu</button><button class="button" id="previewTab" type="button">Menu preview</button></div>
+    </section>
+    <section id="manager" class="dashboard">
+      <div class="panel">
+        <div class="dash-head"><div><div class="eyebrow">Your menu</div><h2>Menu options</h2><p>Add or remove categories and items. Changes save in this browser.</p></div><button class="button primary" id="makeQrBtn" type="button">Create QR code</button></div>
+        <div class="dash-body"><div id="categoryList"></div><button class="button add-category" id="addCategoryBtn" type="button">＋ Add a category</button></div>
+        <div class="dash-foot"><div><div class="status" id="status">Draft is saved on this device.</div><div class="helper">Your QR opens a read-only menu. After editing, create and print the refreshed QR code so guests see the latest version.</div></div><button class="button primary" id="makeQrBtn2" type="button">Create QR code</button></div>
+      </div>
+      <div id="qrArea" class="qr-layout hidden">
+        <div class="panel qr-info"><div class="eyebrow">Ready to share</div><h3>Your menu QR code</h3><p>Scan it to preview the public menu. The code carries the menu options you saved just now. If you change the menu later, generate a fresh code.</p><div class="share-url"><input class="field" id="shareLink" readonly aria-label="Menu link"><button class="button" id="copyLinkBtn" type="button">Copy link</button></div><div class="notice">The QR image is generated with a QR service, using your public menu link as its input. No sign-in or order actions are included.</div></div>
+        <div class="panel qr-card"><img id="qrImage" alt="QR code linking to the view-only cafe menu"><div class="qr-caption">Scan to view the menu</div><a class="button" id="downloadQr" target="_blank" rel="noopener">Open QR image ↗</a></div>
+      </div>
+    </section>
+    <section id="menuView" class="menu-view hidden"></section>
+    <div class="footer">Shiva’s Cafe · Menu for browsing only</div>
+  </main>
+  <script>
+    const starter = [
+      {name:"Hot Beverages",items:[{name:"Masala Tea",price:"",description:""},{name:"Kullad Tea",price:"",description:""}]},
+      {name:"Manchurian",items:[{name:"Manchurian Dry",price:"",description:""},{name:"Manchurian Gravy",price:"",description:""},{name:"Paneer Chilly Dry",price:"",description:""},{name:"Paneer Chilly Gravy",price:"",description:""}]},
+      {name:"Mocktails",items:[{name:"Blue Berry",price:"",description:""},{name:"Blue Lagoon",price:"",description:""}]},
+      {name:"Noodles",items:[{name:"Chilli Garlic Noodle",price:"",description:""},{name:"Hakka Noodle",price:"",description:""},{name:"Manchurian Noodle",price:"",description:""},{name:"Paneer Noodle",price:"",description:""},{name:"Schezwan Noodle",price:"",description:""}]},
+      {name:"Refresh & Chill",items:[{name:"Lemon Ice Tea",price:"",description:""},{name:"Peach Ice Tea",price:"",description:""}]},
+      {name:"Rice",items:[{name:"Chinese Bhel",price:"",description:""},{name:"Manchurian Fried Rice",price:"",description:""},{name:"Noodle Fried Rice",price:"",description:""},{name:"Schezwan Fried Rice",price:"",description:""},{name:"Veg. Fried Rice",price:"",description:""}]},
+      {name:"Royal Thick Shake",items:[{name:"Kit Kat Shake Thickshake",price:"",description:""}]},
+      {name:"Parathas",items:[{name:"Aloo Paratha",price:"",description:""},{name:"Aloo Cheese Paratha",price:"",description:""},{name:"Aloo Paneer Paratha",price:"",description:""}]},
+      {name:"Pulav",items:[{name:"Paneer Pulav",price:"",description:""},{name:"Veg Pulav",price:"",description:""}]},
+      {name:"Pizza & Pasta",items:[]},{name:"Burgers & Sandwiches",items:[]},{name:"Snacks",items:[]},{name:"Desserts",items:[]},{name:"Drinks",items:[]}
+    ];
+    const encode = obj => btoa(unescape(encodeURIComponent(JSON.stringify(obj)))).replaceAll("+","-").replaceAll("/","_").replaceAll("=","");
+    const decode = value => JSON.parse(decodeURIComponent(escape(atob(value.replaceAll("-","+").replaceAll("_","/")))));
+    let menu = structuredClone(starter), isReadOnly = false;
+    const $ = s => document.querySelector(s);
+    const esc = s => String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+    function fromHash(){const match=location.hash.match(/(?:^#|&)menu=([^&]+)/);if(!match)return false;try{const payload=decode(match[1]);const m=Array.isArray(payload)?payload:payload.menu;if(!Array.isArray(m))return false;menu=m;return true}catch{return false}}
+    function save(){if(!isReadOnly){localStorage.setItem("shivas-menu-draft",JSON.stringify(menu));$("#status").textContent="Saved on this device just now."}}
+    function render(){
+      if(isReadOnly){$("#studioHero").classList.add("hidden");$("#manager").classList.add("hidden");$("#menuView").classList.remove("hidden");$("#viewBtn").classList.add("hidden");$("#resetBtn").classList.add("hidden");renderMenu();return}
+      $("#studioHero").classList.remove("hidden");$("#manager").classList.remove("hidden");$("#menuView").classList.add("hidden");$("#viewBtn").classList.remove("hidden");$("#resetBtn").classList.remove("hidden");renderCategories();
+    }
+    function renderCategories(){
+      $("#categoryList").innerHTML=menu.map((cat,ci)=>`<article class="category"><div class="category-head"><div class="category-title"><input aria-label="Category name" data-cat="${ci}" class="cat-name" value="${esc(cat.name)}"><span class="count">${cat.items.length} ${cat.items.length===1?"item":"items"}</span></div><div class="cat-actions"><button class="icon-button delete-cat" data-cat="${ci}" title="Remove category" aria-label="Remove ${esc(cat.name)} category">Remove category ×</button></div></div><div class="items">${cat.items.map((item,ii)=>`<div class="item"><input class="field item-name" data-cat="${ci}" data-item="${ii}" placeholder="Item name" value="${esc(item.name)}" aria-label="Item name"><input class="field item-price" data-cat="${ci}" data-item="${ii}" placeholder="Price, e.g. ₹120" value="${esc(item.price)}" aria-label="Price"><input class="field desc-col item-desc" data-cat="${ci}" data-item="${ii}" placeholder="Short description (optional)" value="${esc(item.description)}" aria-label="Description"><button class="icon-button delete-item" data-cat="${ci}" data-item="${ii}" title="Remove item" aria-label="Remove ${esc(item.name)}">×</button></div>`).join("")}<form class="add-row" data-cat="${ci}"><input class="field name" name="name" placeholder="New menu item" required aria-label="New item name"><input class="field price" name="price" placeholder="₹ Price" aria-label="New item price"><input class="field desc" name="description" placeholder="Description (optional)" aria-label="New item description"><button class="button" type="submit">Add item</button></form></div></article>`).join("");
+      document.querySelectorAll(".cat-name").forEach(el=>el.addEventListener("change",e=>{menu[+e.target.dataset.cat].name=e.target.value.trim()||"Untitled category";save();renderCategories()}));
+      document.querySelectorAll(".item-name,.item-price,.item-desc").forEach(el=>el.addEventListener("change",e=>{const c=+e.target.dataset.cat,i=+e.target.dataset.item,k=e.target.classList.contains("item-name")?"name":e.target.classList.contains("item-price")?"price":"description";menu[c].items[i][k]=e.target.value;save()}));
+      document.querySelectorAll(".delete-cat").forEach(el=>el.addEventListener("click",()=>{menu.splice(+el.dataset.cat,1);save();renderCategories()}));
+      document.querySelectorAll(".delete-item").forEach(el=>el.addEventListener("click",()=>{menu[+el.dataset.cat].items.splice(+el.dataset.item,1);save();renderCategories()}));
+      document.querySelectorAll(".add-row").forEach(form=>form.addEventListener("submit",e=>{e.preventDefault();const fd=new FormData(form),name=String(fd.get("name")).trim();if(!name)return;menu[+form.dataset.cat].items.push({name,price:String(fd.get("price")).trim(),description:String(fd.get("description")).trim()});save();renderCategories()}));
+    }
+    function renderMenu(){
+      const sections=menu.filter(c=>c.items?.length).map(c=>`<section class="menu-category"><h2>${esc(c.name)}</h2>${c.items.map(i=>`<div class="menu-entry"><div class="entry-copy"><div class="entry-name">${esc(i.name)}</div>${i.description?`<div class="entry-desc">${esc(i.description)}</div>`:""}</div>${i.price?`<div class="entry-price">${esc(i.price)}</div>`:""}</div>`).join("")}</section>`).join("");
+      $("#menuView").innerHTML=`<div class="panel"><div class="menu-cover"><div class="eyebrow">Shiva’s Cafe</div><h1>Menu</h1><p>Browse our menu and find your next favourite.</p></div><div class="menu-sections">${sections||"<div class='empty'>Menu items will appear here soon.</div>"}<div class="footer">Menu for browsing only · Prices and availability may change</div></div></div>`;
+    }
+    function makeQr(){
+      const data={v:1,menu:menu};const url=location.origin+location.pathname+"#menu="+encode(data);$("#shareLink").value=url;const qr="https://api.qrserver.com/v1/create-qr-code/?size=420x420&format=png&data="+encodeURIComponent(url);$("#qrImage").src=qr;$("#downloadQr").href=qr;$("#qrArea").classList.remove("hidden");$("#qrArea").scrollIntoView({behavior:"smooth",block:"center"});
+    }
+    $("#addCategoryBtn").addEventListener("click",()=>{menu.push({name:"New category",items:[]});save();renderCategories();document.querySelectorAll(".cat-name").at(-1)?.focus()});
+    $("#makeQrBtn").addEventListener("click",makeQr);$("#makeQrBtn2").addEventListener("click",makeQr);
+    $("#copyLinkBtn").addEventListener("click",async()=>{try{await navigator.clipboard.writeText($("#shareLink").value);$("#copyLinkBtn").textContent="Copied";setTimeout(()=>$("#copyLinkBtn").textContent="Copy link",1400)}catch{$("#shareLink").select();document.execCommand("copy")}});
+    $("#previewTab").addEventListener("click",()=>{const url=location.origin+location.pathname+"#menu="+encode({v:1,menu});window.open(url,"_blank","noopener")});
+    $("#manageTab").addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
+    $("#viewBtn").addEventListener("click",()=>{$("#previewTab").click()});
+    $("#resetBtn").addEventListener("click",()=>{if(confirm("Reset this browser's menu draft to the starter menu?")){menu=structuredClone(starter);localStorage.setItem("shivas-menu-draft",JSON.stringify(menu));$("#qrArea").classList.add("hidden");$("#status").textContent="Starter menu restored.";renderCategories()}});
+    isReadOnly=fromHash();if(isReadOnly){try{const payload=decode(location.hash.match(/(?:^#|&)menu=([^&]+)/)[1]);menu=payload.menu||menu}catch{isReadOnly=false}}
+    if(!isReadOnly){try{const saved=JSON.parse(localStorage.getItem("shivas-menu-draft"));if(Array.isArray(saved))menu=saved}catch{}}
+    render();
+  </script>
+</body>
+</html>
