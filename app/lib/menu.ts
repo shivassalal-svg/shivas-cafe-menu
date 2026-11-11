@@ -31,6 +31,26 @@ let memoryMenu: MenuCategory[] | null = null;
 let lastMenuFetchTime = 0;
 const CACHE_TTL_MS = 2000; // 2 seconds
 
+function normalizeMenu(data: unknown): MenuCategory[] {
+  if (!Array.isArray(data)) return getDefaultMenu();
+  return (data as any[]).map((category: any, categoryIndex: number) => ({
+    id: category.id || `category-${String(categoryIndex).padStart(2, "0")}`,
+    name: category.name || "Untitled Category",
+    sortOrder: typeof category.sortOrder === "number" ? category.sortOrder : categoryIndex,
+    items: Array.isArray(category.items)
+      ? category.items.map((item: any, itemIndex: number) => ({
+          id: item.id || `item-${categoryIndex}-${itemIndex}`,
+          name: item.name || "",
+          price: item.price || "",
+          description: item.description || "",
+          image: item.image || "",
+          sortOrder: typeof item.sortOrder === "number" ? item.sortOrder : itemIndex,
+          outOfStock: Boolean(item.outOfStock),
+        }))
+      : [],
+  }));
+}
+
 function getDefaultMenu(): MenuCategory[] {
   return (sourceMenu as SourceCategory[]).map((category, categoryIndex) => ({
     id: `category-${String(categoryIndex).padStart(2, "0")}`,
@@ -67,9 +87,10 @@ async function loadMenu(): Promise<MenuCategory[]> {
         const data = (await res.json()) as { content?: string };
         if (data.content) {
           const decoded = Buffer.from(data.content, "base64").toString("utf-8");
-          const parsed = JSON.parse(decoded) as MenuCategory[];
-          if (Array.isArray(parsed) && parsed.length > 0) {
-            memoryMenu = parsed;
+          const parsed = JSON.parse(decoded);
+          const normalized = normalizeMenu(parsed);
+          if (normalized.length > 0) {
+            memoryMenu = normalized;
             lastMenuFetchTime = now;
             return memoryMenu;
           }
@@ -83,9 +104,10 @@ async function loadMenu(): Promise<MenuCategory[]> {
   // 2. Fallback to /tmp
   try {
     const data = await fs.readFile(TMP_FILE, "utf-8");
-    const parsed = JSON.parse(data) as MenuCategory[];
-    if (Array.isArray(parsed) && parsed.length > 0) {
-      memoryMenu = parsed;
+    const parsed = JSON.parse(data);
+    const normalized = normalizeMenu(parsed);
+    if (normalized.length > 0) {
+      memoryMenu = normalized;
       lastMenuFetchTime = now;
       return memoryMenu;
     }
@@ -93,16 +115,34 @@ async function loadMenu(): Promise<MenuCategory[]> {
     // ignore
   }
 
-  // 3. Fallback to initial source menu
+  // 3. Fallback to local data/menu-data.json
+  try {
+    const localData = await fs.readFile(
+      path.join(process.cwd(), "data", "menu-data.json"),
+      "utf-8"
+    );
+    const parsed = JSON.parse(localData);
+    const normalized = normalizeMenu(parsed);
+    if (normalized.length > 0) {
+      memoryMenu = normalized;
+      lastMenuFetchTime = now;
+      return memoryMenu;
+    }
+  } catch {
+    // ignore
+  }
+
+  // 4. Fallback to initial source menu
   memoryMenu = getDefaultMenu();
   lastMenuFetchTime = now;
   return memoryMenu;
 }
 
 async function saveMenuData(menu: MenuCategory[]): Promise<void> {
-  memoryMenu = menu;
+  const normalized = normalizeMenu(menu);
+  memoryMenu = normalized;
   lastMenuFetchTime = Date.now();
-  const jsonStr = JSON.stringify(menu, null, 2);
+  const jsonStr = JSON.stringify(normalized, null, 2);
 
   // 1. Save to /tmp
   try {
@@ -111,7 +151,14 @@ async function saveMenuData(menu: MenuCategory[]): Promise<void> {
     // ignore
   }
 
-  // 2. Persist to GitHub repository
+  // 2. Save locally if writable
+  try {
+    await fs.writeFile(path.join(process.cwd(), "data", "menu-data.json"), jsonStr, "utf-8");
+  } catch {
+    // ignore
+  }
+
+  // 3. Persist to GitHub repository
   if (GITHUB_TOKEN && GITHUB_REPO) {
     try {
       let sha: string | undefined;
@@ -167,12 +214,12 @@ export async function saveCategory(input: { id?: string; name: string }): Promis
   if (!name) throw new Error("Category name is required.");
 
   if (input.id) {
-    const existing = menu.find((c) => c.id === input.id);
+    const existing = menu.find((c) => c.id === input.id || c.name === input.id);
     if (existing) {
       existing.name = name;
     }
   } else {
-    const id = `category-${crypto.randomUUID()}`;
+    const id = `category-${Date.now()}`;
     const nextOrder = menu.length > 0 ? Math.max(...menu.map((c) => c.sortOrder)) + 1 : 0;
     menu.push({
       id,
@@ -187,7 +234,7 @@ export async function saveCategory(input: { id?: string; name: string }): Promis
 
 export async function deleteCategory(id: string): Promise<void> {
   const menu = await loadMenu();
-  const filtered = menu.filter((c) => c.id !== id);
+  const filtered = menu.filter((c) => c.id !== id && c.name !== id);
   await saveMenuData(filtered);
 }
 
@@ -201,15 +248,24 @@ export async function saveItem(input: {
   outOfStock?: boolean;
 }): Promise<void> {
   const menu = await loadMenu();
-  const category = menu.find((c) => c.id === input.categoryId);
-  if (!category) throw new Error("Category not found.");
+  let category = menu.find((c) => c.id === input.categoryId || c.name === input.categoryId);
 
-  const values = {
-    id: input.id || `item-${crypto.randomUUID()}`,
+  // Fallback: look for the item across all categories if editing existing item
+  if (!category && input.id) {
+    category = menu.find((c) => c.items.some((i) => i.id === input.id));
+  }
+
+  if (!category) {
+    throw new Error(`Category not found.`);
+  }
+
+  const values: MenuItem = {
+    id: input.id || `item-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
     name: input.name.trim().slice(0, 120),
     price: input.price.trim().slice(0, 32),
     description: input.description.trim().slice(0, 240),
-    image: input.image.trim().slice(0, 500),
+    image: input.image.trim(),
+    sortOrder: 0,
     outOfStock: Boolean(input.outOfStock),
   };
   if (!values.name) throw new Error("Item name is required.");
@@ -217,23 +273,17 @@ export async function saveItem(input: {
   if (input.id) {
     const itemIndex = category.items.findIndex((i) => i.id === input.id);
     if (itemIndex >= 0) {
-      category.items[itemIndex] = {
-        ...category.items[itemIndex],
-        ...values,
-      };
+      values.sortOrder = category.items[itemIndex].sortOrder;
+      category.items[itemIndex] = values;
     } else {
-      category.items.push({
-        ...values,
-        sortOrder: category.items.length,
-      });
+      values.sortOrder = category.items.length;
+      category.items.push(values);
     }
   } else {
     const nextOrder =
       category.items.length > 0 ? Math.max(...category.items.map((i) => i.sortOrder)) + 1 : 0;
-    category.items.push({
-      ...values,
-      sortOrder: nextOrder,
-    });
+    values.sortOrder = nextOrder;
+    category.items.push(values);
   }
 
   await saveMenuData(menu);
@@ -245,21 +295,35 @@ export async function toggleStock(input: {
   outOfStock: boolean;
 }): Promise<void> {
   const menu = await loadMenu();
-  const category = menu.find((c) => c.id === input.categoryId);
+  let targetItem: MenuItem | null = null;
+
+  const category = menu.find((c) => c.id === input.categoryId || c.name === input.categoryId);
   if (category) {
-    const item = category.items.find((i) => i.id === input.id);
-    if (item) {
-      item.outOfStock = input.outOfStock;
-      await saveMenuData(menu);
+    targetItem = category.items.find((i) => i.id === input.id) || null;
+  }
+
+  if (!targetItem) {
+    for (const cat of menu) {
+      targetItem = cat.items.find((i) => i.id === input.id) || null;
+      if (targetItem) break;
     }
+  }
+
+  if (targetItem) {
+    targetItem.outOfStock = input.outOfStock;
+    await saveMenuData(menu);
   }
 }
 
 export async function deleteItem(input: { id: string; categoryId: string }): Promise<void> {
   const menu = await loadMenu();
-  const category = menu.find((c) => c.id === input.categoryId);
+  const category = menu.find((c) => c.id === input.categoryId || c.name === input.categoryId);
   if (category) {
     category.items = category.items.filter((i) => i.id !== input.id);
-    await saveMenuData(menu);
+  } else {
+    for (const cat of menu) {
+      cat.items = cat.items.filter((i) => i.id !== input.id);
+    }
   }
+  await saveMenuData(menu);
 }
