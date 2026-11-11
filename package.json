@@ -6,6 +6,8 @@
     "node": ">=22.13.0"
   },
   "scripts": {
+    "sync-data": "node scripts/sync-production-data.mjs",
+    "prebuild": "node scripts/sync-production-data.mjs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

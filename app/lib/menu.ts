@@ -1,6 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-import sourceMenu from "../../data/source-menu.json";
+import initialMenuData from "../../data/menu-data.json";
 
 export type MenuItem = {
   id: string;
@@ -19,8 +19,6 @@ export type MenuCategory = {
   items: MenuItem[];
 };
 
-type SourceCategory = { name: string; items: Omit<MenuItem, "sortOrder">[] };
-
 const TMP_FILE = path.join("/tmp", "shivas-cafe-menu.json");
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const GITHUB_REPO = process.env.GITHUB_REPO || "shivassalal-svg/shivas-cafe-menu";
@@ -29,7 +27,8 @@ const MENU_FILE_PATH = "data/menu-data.json";
 // In-memory cache for fast repeat requests
 let memoryMenu: MenuCategory[] | null = null;
 let lastMenuFetchTime = 0;
-const CACHE_TTL_MS = 2000; // 2 seconds
+let lastGithubEtag: string | null = null;
+const CACHE_TTL_MS = 4000; // 4 seconds
 
 function normalizeMenu(data: unknown): MenuCategory[] {
   if (!Array.isArray(data)) return getDefaultMenu();
@@ -52,16 +51,7 @@ function normalizeMenu(data: unknown): MenuCategory[] {
 }
 
 function getDefaultMenu(): MenuCategory[] {
-  return (sourceMenu as SourceCategory[]).map((category, categoryIndex) => ({
-    id: `category-${String(categoryIndex).padStart(2, "0")}`,
-    name: category.name,
-    sortOrder: categoryIndex,
-    items: category.items.map((item, itemIndex) => ({
-      ...item,
-      sortOrder: itemIndex,
-      outOfStock: Boolean(item.outOfStock),
-    })),
-  }));
+  return normalizeMenu(initialMenuData);
 }
 
 async function loadMenu(): Promise<MenuCategory[]> {
@@ -70,20 +60,35 @@ async function loadMenu(): Promise<MenuCategory[]> {
     return memoryMenu;
   }
 
-  // 1. Fetch from GitHub repository (authoritative shared store)
+  // 1. Fetch from GitHub repository (authoritative shared store across all instances and deployments)
   if (GITHUB_TOKEN && GITHUB_REPO) {
     try {
+      const headers: Record<string, string> = {
+        Authorization: `token ${GITHUB_TOKEN}`,
+        Accept: "application/vnd.github.v3+json",
+      };
+      if (lastGithubEtag && memoryMenu) {
+        headers["If-None-Match"] = lastGithubEtag;
+      }
+
       const res = await fetch(
         `https://api.github.com/repos/${GITHUB_REPO}/contents/${MENU_FILE_PATH}`,
         {
-          headers: {
-            Authorization: `token ${GITHUB_TOKEN}`,
-            Accept: "application/vnd.github.v3+json",
-          },
+          headers,
           cache: "no-store",
         }
       );
+
+      // If GitHub confirms data has not changed, keep current memoryMenu
+      if (res.status === 304 && memoryMenu) {
+        lastMenuFetchTime = now;
+        return memoryMenu;
+      }
+
       if (res.ok) {
+        const etag = res.headers.get("etag");
+        if (etag) lastGithubEtag = etag;
+
         const data = (await res.json()) as { content?: string };
         if (data.content) {
           const decoded = Buffer.from(data.content, "base64").toString("utf-8");
@@ -92,6 +97,11 @@ async function loadMenu(): Promise<MenuCategory[]> {
           if (normalized.length > 0) {
             memoryMenu = normalized;
             lastMenuFetchTime = now;
+            try {
+              await fs.writeFile(TMP_FILE, JSON.stringify(normalized, null, 2), "utf-8");
+            } catch {
+              // ignore
+            }
             return memoryMenu;
           }
         }
@@ -101,7 +111,7 @@ async function loadMenu(): Promise<MenuCategory[]> {
     }
   }
 
-  // 2. Fallback to /tmp
+  // 2. Fallback to /tmp disk cache
   try {
     const data = await fs.readFile(TMP_FILE, "utf-8");
     const parsed = JSON.parse(data);
@@ -115,7 +125,7 @@ async function loadMenu(): Promise<MenuCategory[]> {
     // ignore
   }
 
-  // 3. Fallback to local data/menu-data.json
+  // 3. Fallback to bundled data/menu-data.json
   try {
     const localData = await fs.readFile(
       path.join(process.cwd(), "data", "menu-data.json"),
@@ -132,7 +142,7 @@ async function loadMenu(): Promise<MenuCategory[]> {
     // ignore
   }
 
-  // 4. Fallback to initial source menu
+  // 4. Fallback to imported default menu
   memoryMenu = getDefaultMenu();
   lastMenuFetchTime = now;
   return memoryMenu;
